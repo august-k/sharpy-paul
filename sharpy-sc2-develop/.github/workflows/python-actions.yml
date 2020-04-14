@@ -1,0 +1,42 @@
+name: Python actions
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run linter and tests
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.7]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Checkout submodules
+      uses: srt32/git-actions@v0.0.3
+      with:
+        args: git submodule update --init --recursive
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements.dev.txt
+
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors
+        echo Running flake8. error/warning count ...
+        flake8 .
+
+    - name: Test with pytest
+      run: |
+        pytest
