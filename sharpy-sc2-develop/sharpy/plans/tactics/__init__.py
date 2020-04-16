@@ -10,3 +10,4 @@ from .worker_scout import WorkerScout
 from .warn_build_macro import WarnBuildMacro
 from .worker_counterattack import WorkerCounterAttack
 from .worker_rally_point import WorkerRallyPoint
+from .host_zone_attack2 import HostPlanZoneAttack
