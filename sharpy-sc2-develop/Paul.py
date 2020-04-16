@@ -370,7 +370,6 @@ class PaulBot(KnowledgeBot):
                         [
                             InjectLarva(),
                             PlanDistributeWorkers(),
-                            Step(None, WorkerScout(), skip_until=RequiredSupply(14)),
                             OverlordScout(),
                             PlanZoneGather(),
                             self.attack,
