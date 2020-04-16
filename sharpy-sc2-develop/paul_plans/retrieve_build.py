@@ -5,7 +5,7 @@ Called from KnowledgeBot inheritor.
 """
 from sharpy.plans import BuildOrder
 
-from .opening import LingRush, MacroBuild
+from .opening import LingRush, MacroBuild, TwelvePoolExpand
 
 
 def retrieve_build(build: str) -> BuildOrder:
@@ -20,6 +20,8 @@ def retrieve_build(build: str) -> BuildOrder:
     """
     if build == "LingRush":
         order = LingRush()
-    else:
+    elif build == "Macro":
         order = MacroBuild()
+    else:
+        order = TwelvePoolExpand()
     return order
