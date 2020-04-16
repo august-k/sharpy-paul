@@ -28,6 +28,7 @@ class KnowledgeBot(BotAI):
         self.realtime_split = True
         self.last_game_loop = -1
         self.distance_calculation_method = 0
+        self.unit_command_uses_self_do = True
 
     async def real_init(self):
         self.knowledge.pre_start(self)
@@ -73,7 +74,7 @@ class KnowledgeBot(BotAI):
 
         # Start building first worker before doing any heavy calculations
         # This is only needed for real time, but we don't really know whether the game is real time or not.
-        await self.start_first_worker()
+        # await self.start_first_worker()
         self._client.game_step = int(self.config["general"]["game_step_size"])
 
         if self.realtime_split:
@@ -167,12 +168,12 @@ class KnowledgeBot(BotAI):
         log(f"Opponent race: {self.knowledge.enemy_race.name}")
         log(f"OpponentId: {self.opponent_id}")
 
-    async def start_first_worker(self):
-        if self.townhalls and self.realtime_worker:
-            townhall = self.townhalls.first
-            if townhall.type_id == UnitTypeId.COMMANDCENTER:
-                await self.synchronous_do(townhall.train(UnitTypeId.SCV))
-            if townhall.type_id == UnitTypeId.NEXUS:
-                await self.synchronous_do(townhall.train(UnitTypeId.PROBE))
-            if townhall.type_id == UnitTypeId.HATCHERY:
-                await self.synchronous_do(townhall.train(UnitTypeId.DRONE))
+    # async def start_first_worker(self):
+    #     if self.townhalls and self.realtime_worker:
+    #         townhall = self.townhalls.first
+    #         if townhall.type_id == UnitTypeId.COMMANDCENTER:
+    #             await self.synchronous_do(townhall.train(UnitTypeId.SCV))
+    #         if townhall.type_id == UnitTypeId.NEXUS:
+    #             await self.synchronous_do(townhall.train(UnitTypeId.PROBE))
+    #         if townhall.type_id == UnitTypeId.HATCHERY:
+    #             await self.synchronous_do(townhall.train(UnitTypeId.DRONE))
