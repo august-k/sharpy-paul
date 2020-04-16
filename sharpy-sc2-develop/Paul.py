@@ -31,6 +31,7 @@ from sharpy.plans.tactics import (
     HostPlanZoneAttack,
     PlanDistributeWorkers,
     PlanFinishEnemy,
+    PlanWorkerOnlyDefense,
     PlanZoneDefense,
     PlanZoneGather,
     WorkerScout,
@@ -360,7 +361,9 @@ class PaulBot(KnowledgeBot):
         self.opener = retrieve_build(build)
 
         if isinstance(self.opener, LingRush):
-            return BuildOrder([CounterTerranTie([self.opener]), PaulBuild(), InjectLarva(), attack_tactics])
+            return BuildOrder(
+                [CounterTerranTie([self.opener]), PaulBuild(), InjectLarva(), attack_tactics, PlanWorkerOnlyDefense()]
+            )
         else:
             return BuildOrder(
                 [
@@ -376,6 +379,7 @@ class PaulBot(KnowledgeBot):
                             PlanZoneDefense(),
                             PlanFinishEnemy(),
                             PlanBurrowDrone(),
+                            PlanWorkerOnlyDefense(),
                         ]
                     ),
                 ]
