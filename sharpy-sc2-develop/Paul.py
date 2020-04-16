@@ -207,9 +207,7 @@ class Tech(BuildOrder):
             ]
         )
 
-        super().__init__(
-            [tech_buildings, self.gas_buildings, unit_upgrades, generic_upgrades, misc_upgrades,]
-        )
+        super().__init__([tech_buildings, self.gas_buildings, unit_upgrades, generic_upgrades, misc_upgrades])
 
     async def execute(self):
         hatches = self.get_count(UnitTypeId.HATCHERY)
@@ -253,7 +251,7 @@ class LarvaBuild(BuildOrder):
         self.inject_queen = ZergUnit(UnitTypeId.QUEEN, to_count=2, priority=True)
 
         super().__init__(
-            [self.hydra, self.swarmhost, self.ravager, self.roach, self.drone, self.zergling, self.inject_queen,]
+            [self.hydra, self.swarmhost, self.ravager, self.roach, self.drone, self.zergling, self.inject_queen]
         )
 
     async def execute(self):
@@ -362,7 +360,7 @@ class PaulBot(KnowledgeBot):
         self.opener = retrieve_build(build)
 
         if isinstance(self.opener, LingRush):
-            return BuildOrder([CounterTerranTie([self.opener]), PaulBuild(), InjectLarva(), attack_tactics,])
+            return BuildOrder([CounterTerranTie([self.opener]), PaulBuild(), InjectLarva(), attack_tactics])
         else:
             return BuildOrder(
                 [
