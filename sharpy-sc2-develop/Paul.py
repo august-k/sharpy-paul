@@ -7,7 +7,7 @@ from sc2.ids.unit_typeid import UnitTypeId
 from sc2.ids.upgrade_id import UpgradeId
 from sc2.player import Bot, Computer, Difficulty, Race
 
-from paul_plans import MassExpand, retrieve_build
+from paul_plans import MassExpand, retrieve_build, OverlordScoutOrder
 from paul_plans.opening import LingRush
 from sharpy.knowledges import KnowledgeBot
 from sharpy.managers.game_states.advantage import at_least_small_disadvantage
@@ -26,6 +26,7 @@ from sharpy.plans.require import (
     RequiredTechReady,
     RequiredUnitExists,
     RequiredUnitReady,
+    RequiredTime,
 )
 from sharpy.plans.tactics import (
     HostPlanZoneAttack,
@@ -41,6 +42,7 @@ from sharpy.plans.tactics.zerg import (
     OverlordScout,
     CounterTerranTie,
     PlanBurrowDrone,
+    OverlordScoutMain,
 )
 
 
@@ -356,6 +358,7 @@ class PaulBot(KnowledgeBot):
         else:
             build = random.choice(["LingRush", "Macro", "12Pool"])
 
+        build = "Macro"
         self.knowledge.data_manager.set_build(build)
 
         self.opener = retrieve_build(build)
@@ -369,6 +372,7 @@ class PaulBot(KnowledgeBot):
                 [
                     self.opener,
                     CounterTerranTie([PaulBuild()]),
+                    OverlordScoutOrder(),
                     SequentialList(
                         [
                             InjectLarva(),
@@ -380,6 +384,23 @@ class PaulBot(KnowledgeBot):
                             PlanFinishEnemy(),
                             PlanBurrowDrone(),
                             PlanWorkerOnlyDefense(),
+                            # SequentialList(
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(2 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(4 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(6 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(8 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(10 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(12 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(14 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(16 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(18 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(20 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(22 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(24 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(26 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(28 * 60)),
+                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(30 * 60)),
+                            # ),
                         ]
                     ),
                 ]

@@ -10,7 +10,7 @@ from sc2.unit import Unit
 
 class OverlordScoutMain(ActBase):
     def __init__(self):
-        self.scout_tags: List[int] = []
+        self.scout_tag: int = 0
         super().__init__()
 
     async def start(self, knowledge: "Knowledge"):
@@ -18,21 +18,21 @@ class OverlordScoutMain(ActBase):
 
     async def execute(self) -> bool:
         overlords = self.cache.own(UnitTypeId.OVERLORD)
-        scouts = self.roles.all_from_task(UnitTask.Scouting)
-        scout_overlords = overlords.tags_in(scouts.tags)
+        scouts = self.roles.all_from_task(UnitTask.OverlordScout)
+        scout_overlord = overlords.tags_in(scouts.tags)
         non_scout_overlords = overlords.tags_not_in(scouts.tags)
 
-        if len(self.scout_tags) > 0 and not len(scout_overlords) == 0:
+        if self.scout_tag:
             return True
 
-        if len(self.scout_tags) == 0 and non_scout_overlords.amount > 1:
-            scout_overlords = Units(non_scout_overlords[0], self.ai)
-            self.scout_tags = scout_overlords.tags
+        if not self.scout_tag and non_scout_overlords.amount > 1:
+            scout_overlord = non_scout_overlords[0]
+            self.scout_tag = scout_overlord.tag
 
-        for scout in scout_overlords:
-            self.knowledge.roles.set_task(UnitTask.Scouting, scout)
+        if scout_overlord:
+            self.knowledge.roles.set_task(UnitTask.OverlordScout, scout_overlord)
             target = self.knowledge.expansion_zones[-1].behind_mineral_position_center
 
-            self.do(scout.movee(target))
+            self.do(scout_overlord.move(target))
 
         return True

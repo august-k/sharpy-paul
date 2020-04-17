@@ -13,3 +13,4 @@ class UnitTask(enum.Enum):
     Attacking = 7  # Attacking enemy base
     Reserved = 8  # Reserved for some unknown purpose, i.e. gate keeper
     Hallucination = 9  # Not a real unit.
+    OverlordScout = 10  # For overlord scouting
