@@ -214,7 +214,9 @@ class Tech(BuildOrder):
 
     async def execute(self):
         hatches = self.get_count(UnitTypeId.HATCHERY)
-        if hatches >= 3 and self.get_count(UnitTypeId.LAIR, include_pending=True):
+        if hatches >= 3 and (
+            self.get_count(UnitTypeId.LAIR, include_pending=True) or self.get_count(UnitTypeId.EXTRACTOR) == 0
+        ):
             self.gas_buildings.to_count = min(2 * (hatches - 1), 8)
         if not self.flier_found:
             self.flier_found = self.enemy_fliers(self.knowledge)
@@ -384,23 +386,6 @@ class PaulBot(KnowledgeBot):
                             PlanFinishEnemy(),
                             PlanBurrowDrone(),
                             PlanWorkerOnlyDefense(),
-                            # SequentialList(
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(2 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(4 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(6 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(8 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(10 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(12 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(14 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(16 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(18 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(20 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(22 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(24 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(26 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(28 * 60)),
-                            #     Step(None, OverlordScoutMain(), skip_until=RequiredTime(30 * 60)),
-                            # ),
                         ]
                     ),
                 ]
