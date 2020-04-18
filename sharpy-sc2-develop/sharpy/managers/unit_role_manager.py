@@ -46,6 +46,7 @@ class UnitRoleManager(ManagerBase):
         self.roles.append(UnitsInRole(UnitTask.Reserved, self.cache, self.ai))
         self.roles.append(UnitsInRole(UnitTask.Hallucination, self.cache, self.ai))
         self.roles.append(UnitsInRole(UnitTask.OverlordScout, self.cache, self.ai))
+        self.roles.append(UnitsInRole(UnitTask.BurrowedDrone, self.cache, self.ai))
 
     def attack_ended(self):
         attackers = self.roles[UnitTask.Attacking.value].units

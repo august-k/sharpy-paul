@@ -14,3 +14,4 @@ class UnitTask(enum.Enum):
     Reserved = 8  # Reserved for some unknown purpose, i.e. gate keeper
     Hallucination = 9  # Not a real unit.
     OverlordScout = 10  # For overlord scouting
+    BurrowedDrone = 11  # Drone that has been burrowed

@@ -37,12 +37,10 @@ class PlanBurrowDrone(ActBase):
                     # burrow if zone is in danger
                     for unit in zone.our_units(UnitTypeId.DRONE):
                         self.ai.do(unit(AbilityId.BURROWDOWN_DRONE))
-                        self.knowledge.unit_role_manager.set_task(
-                            UnitTask.BurrowedDrone, unit
-                        )
+                        self.knowledge.roles.set_task(UnitTask.BurrowedDrone, unit)
                 else:
                     # unburrow once zone is safe
                     for unit in zone.our_units(UnitTypeId.DRONEBURROWED):
                         self.ai.do(unit(AbilityId.BURROWUP_DRONE))
-                        self.knowledge.unit_role_manager.clear_task(unit)
+                        self.knowledge.roles.clear_task(unit)
         return True
