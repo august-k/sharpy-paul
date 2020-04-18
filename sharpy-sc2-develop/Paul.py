@@ -22,6 +22,7 @@ from sharpy.plans.acts.zerg import (
 )
 from sharpy.plans.require import (
     RequiredAll,
+    RequiredAny,
     RequiredSupply,
     RequiredTechReady,
     RequiredUnitExists,
@@ -68,11 +69,18 @@ class Tech(BuildOrder):
         tech_buildings = BuildOrder(
             [
                 Step(
-                    RequiredAll(
+                    RequiredAny(
                         [
-                            RequiredUnitExists(UnitTypeId.HATCHERY, 3, include_pending=False, include_not_ready=False,),
-                            RequiredUnitExists(UnitTypeId.DRONE, 60),
-                        ],
+                            RequiredAll(
+                                [
+                                    RequiredUnitExists(
+                                        UnitTypeId.HATCHERY, 3, include_pending=False, include_not_ready=False,
+                                    ),
+                                    RequiredUnitExists(UnitTypeId.DRONE, 60),
+                                ],
+                            ),
+                            RequiredTime(5 * 60 + 30),
+                        ]
                     ),
                     MorphLair(),
                 ),
