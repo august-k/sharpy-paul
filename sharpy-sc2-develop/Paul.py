@@ -126,6 +126,7 @@ class Tech(BuildOrder):
                     RequiredAll(
                         [
                             RequiredUnitReady(UnitTypeId.EVOLUTIONCHAMBER),
+                            RequiredUnitExists(UnitTypeId.LAIR),
                             RequiredTechReady(UpgradeId.ZERGMISSILEWEAPONSLEVEL1),
                         ]
                     ),
@@ -144,6 +145,7 @@ class Tech(BuildOrder):
                     RequiredAll(
                         [
                             RequiredUnitReady(UnitTypeId.EVOLUTIONCHAMBER),
+                            RequiredUnitExists(UnitTypeId.LAIR),
                             RequiredTechReady(UpgradeId.ZERGGROUNDARMORSLEVEL1),
                         ]
                     ),
@@ -162,6 +164,7 @@ class Tech(BuildOrder):
                     RequiredAll(
                         [
                             RequiredUnitReady(UnitTypeId.EVOLUTIONCHAMBER),
+                            RequiredUnitExists(UnitTypeId.LAIR),
                             RequiredTechReady(UpgradeId.ZERGMELEEWEAPONSLEVEL1),
                         ]
                     ),
