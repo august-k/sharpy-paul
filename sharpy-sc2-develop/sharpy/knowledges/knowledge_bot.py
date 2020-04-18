@@ -36,6 +36,7 @@ class KnowledgeBot(BotAI):
         self.distance_calculation_method = 0
         self.unit_command_uses_self_do = True
         self.hidden_ol_spots: List[Point2] = None
+        self.ol_spot_index: int = 0
 
     async def real_init(self):
         self.knowledge.pre_start(self)
@@ -164,6 +165,12 @@ class KnowledgeBot(BotAI):
     async def on_unit_created(self, unit: Unit):
         if self.knowledge.ai is not None:
             await self.knowledge.on_unit_created(unit)
+        if unit.type_id == UnitTypeId.OVERLORD:
+            if self.ol_spot_index + 1 >= len(self.hidden_ol_spots):
+                return
+            else:
+                self.do(unit.move(Point2(self.hidden_ol_spots[self.ol_spot_index])))
+                self.ol_spot_index += 1
 
     async def on_building_construction_started(self, unit: Unit):
         if self.knowledge.ai is not None:
