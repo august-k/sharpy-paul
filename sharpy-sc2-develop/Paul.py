@@ -375,19 +375,15 @@ class PaulBot(KnowledgeBot):
                     self.opener,
                     CounterTerranTie([PaulBuild()]),
                     OverlordScoutOrder(),
-                    SequentialList(
-                        [
-                            InjectLarva(),
-                            PlanDistributeWorkers(),
-                            OverlordScout(),
-                            PlanZoneGather(),
-                            self.attack,
-                            PlanZoneDefense(),
-                            PlanFinishEnemy(),
-                            PlanBurrowDrone(),
-                            PlanWorkerOnlyDefense(),
-                        ]
-                    ),
+                    InjectLarva(),
+                    PlanDistributeWorkers(),
+                    OverlordScout(),
+                    PlanZoneGather(),
+                    self.attack,
+                    PlanZoneDefense(),
+                    PlanFinishEnemy(),
+                    PlanBurrowDrone(),
+                    PlanWorkerOnlyDefense(),
                 ]
             )
 
