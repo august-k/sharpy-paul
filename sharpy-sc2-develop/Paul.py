@@ -43,6 +43,8 @@ from sharpy.plans.tactics.zerg import (
     CounterTerranTie,
     PlanBurrowDrone,
     OverlordScoutMain,
+    PlanHeatOverseer,
+    SpreadCreep,
 )
 
 
@@ -112,6 +114,10 @@ class Tech(BuildOrder):
                 Step(
                     RequiredUnitReady(UnitTypeId.HYDRALISKDEN),
                     ActTech(UpgradeId.EVOLVEMUSCULARAUGMENTS, UnitTypeId.HYDRALISKDEN),
+                ),
+                Step(
+                    RequiredAll([RequiredUnitReady(UnitTypeId.SPAWNINGPOOL), RequiredUnitExists(UnitTypeId.HIVE)]),
+                    ActTech(UpgradeId.ZERGLINGATTACKSPEED, UnitTypeId.SPAWNINGPOOL),
                 ),
             ]
         )
@@ -256,11 +262,9 @@ class LarvaBuild(BuildOrder):
         self.roach = ZergUnit(UnitTypeId.ROACH, to_count=0)
         self.ravager = MorphRavager(target_count=0)
         self.swarmhost = ZergUnit(UnitTypeId.SWARMHOSTMP, to_count=0)
-        self.inject_queen = ZergUnit(UnitTypeId.QUEEN, to_count=2, priority=True)
+        self.queens = ZergUnit(UnitTypeId.QUEEN, to_count=5, priority=True)
 
-        super().__init__(
-            [self.hydra, self.swarmhost, self.ravager, self.roach, self.drone, self.zergling, self.inject_queen]
-        )
+        super().__init__([self.hydra, self.swarmhost, self.ravager, self.roach, self.drone, self.zergling, self.queens])
 
     async def execute(self):
         """Manage economy vs army."""
@@ -296,7 +300,7 @@ class LarvaBuild(BuildOrder):
         self.set_to_zero(exclude=set_this_iteration)
         hatches = self.get_count(UnitTypeId.HATCHERY, include_pending=False, include_not_ready=False)
         if hatches >= 3:
-            self.inject_queen.to_count = min(hatches, 5)
+            self.queens.to_count = min(hatches, 5) + 3
 
         return await super().execute()
 
@@ -363,7 +367,6 @@ class PaulBot(KnowledgeBot):
         else:
             build = random.choice(["LingRush", "Macro", "12Pool"])
 
-        build = "Macro"
         self.knowledge.data_manager.set_build(build)
 
         self.opener = retrieve_build(build)
@@ -387,6 +390,8 @@ class PaulBot(KnowledgeBot):
                     PlanFinishEnemy(),
                     PlanBurrowDrone(),
                     PlanWorkerOnlyDefense(),
+                    PlanHeatOverseer(),
+                    SpreadCreep(),
                 ]
             )
 
