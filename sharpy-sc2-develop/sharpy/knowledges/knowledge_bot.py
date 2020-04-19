@@ -110,10 +110,6 @@ class KnowledgeBot(BotAI):
         if map_name not in overlord_spots:
             self.calculate_overlord_spots()
             overlord_spots[map_name] = [tuple(pos) for pos in self.hidden_ol_spots]
-            with open(f"{OVERLORD_PATH}cached_overlord_spots.json", "w") as f:
-                json.dump(overlord_spots, f, indent="\t")
-        else:
-            self.hidden_ol_spots = [Point2(pos) for pos in overlord_spots[map_name]]
 
     async def on_step(self, iteration):
         try:
