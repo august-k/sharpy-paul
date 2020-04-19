@@ -373,7 +373,8 @@ class PaulBot(KnowledgeBot):
         ):
             build = self.knowledge.data_manager.last_result.build_used
         else:
-            build = random.choice(["LingRush", "Macro", "12Pool"])
+            # build = random.choice(["LingRush", "Macro", "12Pool"])
+            build = random.choice(["LingRush", "Macro"])
 
         self.knowledge.data_manager.set_build(build)
 
