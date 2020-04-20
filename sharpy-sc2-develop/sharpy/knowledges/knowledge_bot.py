@@ -104,12 +104,7 @@ class KnowledgeBot(BotAI):
     async def on_start(self):
         """Allows initializing the bot when the game data is available."""
         await self.real_init()
-        with open(f"{OVERLORD_PATH}cached_overlord_spots.json", "r") as f:
-            overlord_spots = json.load(f)
-        map_name = self.game_info.map_name
-        if map_name not in overlord_spots:
-            self.calculate_overlord_spots()
-            overlord_spots[map_name] = [tuple(pos) for pos in self.hidden_ol_spots]
+        self.calculate_overlord_spots()
 
     async def on_step(self, iteration):
         try:
@@ -165,7 +160,7 @@ class KnowledgeBot(BotAI):
             if self.ol_spot_index + 1 >= len(self.hidden_ol_spots):
                 return
             else:
-                self.do(unit.move(Point2(self.hidden_ol_spots[self.ol_spot_index])))
+                self.do(unit.move(self.hidden_ol_spots[self.ol_spot_index]))
                 self.ol_spot_index += 1
 
     async def on_building_construction_started(self, unit: Unit):

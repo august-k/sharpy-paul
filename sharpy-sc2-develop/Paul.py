@@ -17,6 +17,7 @@ from sharpy.plans.acts.zerg import (
     AutoOverLord,
     MorphHive,
     MorphLair,
+    MorphOverseer,
     MorphRavager,
     ZergUnit,
 )
@@ -112,7 +113,7 @@ class Tech(BuildOrder):
         unit_upgrades = BuildOrder(
             [
                 Step(
-                    RequiredUnitReady(UnitTypeId.ROACHWARREN),
+                    RequiredAll([RequiredUnitReady(UnitTypeId.ROACHWARREN), RequiredUnitExists(UnitTypeId.LAIR)]),
                     ActTech(UpgradeId.GLIALRECONSTITUTION, UnitTypeId.ROACHWARREN),
                 ),
                 Step(
@@ -271,8 +272,20 @@ class LarvaBuild(BuildOrder):
         self.ravager = MorphRavager(target_count=0)
         self.swarmhost = ZergUnit(UnitTypeId.SWARMHOSTMP, to_count=0)
         self.queens = ZergUnit(UnitTypeId.QUEEN, to_count=5, priority=True)
+        self.overseer = ZergUnit(UnitTypeId.OVERSEER, to_count=0, priority=True)
 
-        super().__init__([self.hydra, self.swarmhost, self.ravager, self.roach, self.drone, self.zergling, self.queens])
+        super().__init__(
+            [
+                self.hydra,
+                self.swarmhost,
+                self.ravager,
+                self.roach,
+                self.drone,
+                self.zergling,
+                self.queens,
+                self.overseer,
+            ]
+        )
 
     async def execute(self):
         """Manage economy vs army."""
@@ -285,7 +298,10 @@ class LarvaBuild(BuildOrder):
         # build the main army
         # TODO: add the structures needed to build these units
         set_this_iteration = set()
-        if self.knowledge.game_analyzer.our_army_predict not in at_least_small_disadvantage:
+        if (
+            self.knowledge.game_analyzer.our_army_predict not in at_least_small_disadvantage
+            and not self.knowledge.build_detector.rush_build
+        ):
             self.drone.to_count = min(22 * self.get_count(UnitTypeId.HATCHERY), 80)
         else:
             self.drone.to_count = 0
@@ -301,9 +317,10 @@ class LarvaBuild(BuildOrder):
             self.roach.to_count = self.knowledge.available_gas / 25
             set_this_iteration.add(self.ravager)
             set_this_iteration.add(self.roach)
-        else:
-            if self.cache.own(UnitTypeId.SPAWNINGPOOL):
-                self.zergling.to_count = 80
+        if self.get_count(UnitTypeId.LAIR) >= 1:
+            self.overseer.to_count = 3
+        if self.cache.own(UnitTypeId.SPAWNINGPOOL):
+            self.zergling.to_count = 80
             set_this_iteration.add(self.zergling)
         self.set_to_zero(exclude=set_this_iteration)
         hatches = self.get_count(UnitTypeId.HATCHERY, include_pending=False, include_not_ready=False)
@@ -315,7 +332,7 @@ class LarvaBuild(BuildOrder):
     def set_to_zero(self, exclude: Set[ZergUnit] = set()) -> None:
         """
         If unit was not assigned this step, reset the count.
-        Drones and queens are handled separately.
+        Drones, queens, and overseers are handled separately.
         """
 
         for unit_type in {
