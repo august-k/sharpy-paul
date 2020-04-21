@@ -12,7 +12,14 @@ from paul_plans.build_manager import BuildSelector
 from paul_plans.opening import ViBE
 from sharpy.knowledges import KnowledgeBot
 from sharpy.plans import BuildOrder
-from sharpy.plans.tactics import PlanFinishEnemy, PlanWorkerOnlyDefense, PlanZoneAttack, PlanZoneDefense, PlanZoneGather
+from sharpy.plans.tactics import (
+    PlanFinishEnemy,
+    PlanWorkerOnlyDefense,
+    PlanZoneAttack,
+    PlanZoneDefense,
+    PlanZoneGather,
+    PlanDistributeWorkers,
+)
 
 
 class PostOpening(BuildOrder):
@@ -39,7 +46,7 @@ class PaulBot(KnowledgeBot):
         """Turn plan into BuildOrder."""
         attack_tactics = [PlanZoneGather, PlanZoneDefense, self.attack, PlanFinishEnemy(), PlanWorkerOnlyDefense()]
 
-        return BuildOrder([ViBE(), attack_tactics])
+        return BuildOrder([ViBE(), attack_tactics, PlanDistributeWorkers()])
 
     async def on_start(self):
         """Automatically called at the start of the game once game info is available."""
