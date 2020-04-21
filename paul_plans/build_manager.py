@@ -7,6 +7,7 @@ from sharpy.managers import ManagerBase
 from sharpy.plans import BuildOrder
 
 BUILDS: Dict[str, Callable[[], BuildOrder]] = {
+    "default": lambda: ViBE(),
     "ViBE": lambda: ViBE(),
     "ling_flood": lambda: LingRush(),
     # TODO: add enemy_one_base defense plan
