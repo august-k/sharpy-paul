@@ -3,8 +3,8 @@ from typing import List, Optional, Dict
 
 import numpy as np
 import sc2
-from sc2 import Difficulty, Race, position
-from sc2.data import AIBuild
+from sc2 import position
+from sc2.data import AIBuild, Difficulty, Race
 from sc2.ids.unit_typeid import UnitTypeId
 from sc2.player import Bot, Computer
 from sc2.position import Point2
