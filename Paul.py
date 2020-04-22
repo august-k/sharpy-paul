@@ -1,25 +1,41 @@
 """Main code for running Paul."""
-from typing import List
+from typing import List, Optional, Dict
 
+import numpy as np
 import sc2
-from sc2 import Difficulty, Race
+from sc2 import Difficulty, Race, position
+from sc2.data import AIBuild
+from sc2.ids.unit_typeid import UnitTypeId
 from sc2.player import Bot, Computer
 from sc2.position import Point2
-from sc2 import position
-import numpy as np
+from sc2.unit import Unit
 from sklearn.cluster import KMeans
+
 from paul_plans.build_manager import BuildSelector
 from paul_plans.opening import ViBE
 from sharpy.knowledges import KnowledgeBot
-from sharpy.plans import BuildOrder
+from sharpy.managers import ManagerBase
+from sharpy.managers.unit_role_manager import UnitTask
+from sharpy.plans import BuildOrder, Step
 from sharpy.plans.tactics import (
+    PlanDistributeWorkers,
     PlanFinishEnemy,
     PlanWorkerOnlyDefense,
     PlanZoneAttack,
     PlanZoneDefense,
     PlanZoneGather,
-    PlanDistributeWorkers,
 )
+from sharpy.plans.tactics.zerg import InjectLarva, SpreadCreep
+from sharpy.plans.require import RequireCustom
+from paul_plans.opening.ling_rush import LingRush
+from paul_plans.roach_ravager_swarmhost import RRSH
+
+allowed_builds = {
+    "ViBE": ViBE(),
+    "ling_flood": LingRush(),
+    "roach_ravager_swarmhost": RRSH(),
+    # TODO: add enemy_one_base defense plan
+}
 
 
 class PostOpening(BuildOrder):
@@ -31,27 +47,88 @@ class PostOpening(BuildOrder):
 class PaulBot(KnowledgeBot):
     """Run Paul."""
 
-    def __init__(self, build_name: str = "default"):
+    def __init__(self, build_name: str = ""):
         """Set up attack parameters and name."""
         super().__init__("Paul")
         self.my_race = Race.Zerg
         self.attack = PlanZoneAttack(120)
         self.attack.retreat_multiplier = 0.3
-        self.opener = None
         self.build_name = build_name
         self.build_selector = BuildSelector(build_name)
         self.hidden_ol_spots: List[Point2]
+        self.hidden_ol_index: int = 0
+        self.scout_ling_count = 0
+        self.ling_scout_location: Dict[int, Point2]
 
     async def create_plan(self) -> BuildOrder:
         """Turn plan into BuildOrder."""
-        attack_tactics = [PlanZoneGather, PlanZoneDefense, self.attack, PlanFinishEnemy(), PlanWorkerOnlyDefense()]
+        attack_tactics = [
+            PlanZoneGather(),
+            PlanZoneDefense(),
+            self.attack,
+            PlanFinishEnemy(),
+            PlanWorkerOnlyDefense(),
+        ]
 
-        return BuildOrder([ViBE(), attack_tactics, PlanDistributeWorkers()])
+        # builds = []
+        # for key, build_order_call in allowed_builds:
+        #     builds.append(
+        #         Step(None, build_order_call(), skip_until=lambda k, key=key: self.build_selector.response == key)
+        #     )
+        builds = [
+            Step(None, ViBE(), skip_until=RequireCustom(lambda k: k.ai.build_selector.response == "ViBE")),
+            Step(
+                None,
+                RRSH(),
+                skip_until=RequireCustom(lambda k: k.ai.build_selector.response == "roach_ravager_swarmhost"),
+            ),
+        ]
+        return BuildOrder([builds, attack_tactics, PlanDistributeWorkers(), InjectLarva(), SpreadCreep()])
 
     async def on_start(self):
-        """Automatically called at the start of the game once game info is available."""
+        """
+        Calculate and sort Overlord hidden spots.
+
+        Automatically called at the start of the game once game info is available.
+        """
         await self.real_init()
         self.calculate_overlord_spots()
+        self.hidden_ol_spots.sort(
+            key=lambda x: self.knowledge.ai._distance_pos_to_pos(x, self.knowledge.enemy_main_zone.center_location),
+        )
+        self.ling_scout_location = {
+            0: self.knowledge.zone_manager.enemy_expansion_zones[1].gather_point,
+            1: self.knowledge.zone_manager.enemy_expansion_zones[2].gather_point,
+            2: self.knowledge.ai.game_info.map_center,
+            3: self.knowledge.zone_manager.expansion_zones[2].gather_point,
+        }
+
+    def configure_managers(self) -> Optional[List[ManagerBase]]:
+        """Add custom managers."""
+        return [self.build_selector]
+
+    async def on_unit_created(self, unit: Unit):
+        """Send Overlords and lings to scouting spots."""
+        if unit.type_id == UnitTypeId.OVERLORD:
+            if self.hidden_ol_index + 1 >= len(self.hidden_ol_spots):
+                return
+            else:
+                if self.hidden_ol_index == 0:
+                    self.do(
+                        unit.move(
+                            self.knowledge.zone_manager.enemy_expansion_zones[0].center_location.towards(
+                                self.knowledge.ai.game_info.map_center, 11
+                            )
+                        )
+                    )
+                self.do(unit.move(self.hidden_ol_spots[self.hidden_ol_index], queue=True))
+                self.hidden_ol_index += 1
+
+        elif unit.type_id == UnitTypeId.ZERGLING:
+            if self.scout_ling_count in self.ling_scout_location:
+                self.do(unit.move(self.ling_scout_location[self.scout_ling_count]))
+                self.knowledge.roles.set_task(UnitTask.Scouting, unit)
+                self.scout_ling_count += 1
 
     def calculate_overlord_spots(self):
         """Calculate hidden overlord spots for scouting."""
@@ -177,7 +254,7 @@ def main():
     """Run things."""
     sc2.run_game(
         sc2.maps.get("TritonLE"),
-        [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard)],
+        [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard, AIBuild.Rush)],
         realtime=False,
         save_replay_as="Paul2.SC2Replay",
     )
