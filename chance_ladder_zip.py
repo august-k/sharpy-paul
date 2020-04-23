@@ -24,7 +24,7 @@ class LadderZip:
             "paul_plans",
             "Paul.py",
             "sharpy",
-            "python-sc2/sc2",
+            "sc2",
             "sc2pathlibp",
             "jsonpickle",
             "requirements.txt",
