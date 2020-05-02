@@ -18,12 +18,20 @@ BUILDS: Dict[str, Callable[[], BuildOrder]] = {
 class BuildSelector(ManagerBase):
     """Select builds based on information."""
 
-    def __init__(self, build_name: str = ""):
-        """Set up initial build."""
+    def __init__(self, build_name: str = "", follow_up: str = ""):
+        """
+        Set up initial build.
+        @param build_name: name of opener
+        @param follow_up: name of next build to transition to
+        """
         if build_name:
             self.response = build_name
         else:
-            self.response = "ViBE"
+            self.response = "macro"
+        if follow_up:
+            self.next_build = follow_up
+        else:
+            self.next_build = "roach_ravager_swarmhost"
 
         super().__init__()
 
@@ -31,6 +39,9 @@ class BuildSelector(ManagerBase):
         """Update the build order."""
         if self.response == "ViBE":
             if self.knowledge.ai.vespene >= 92:
+                self.response = "roach_ravager_swarmhost"
+        elif self.response == "macro":
+            if self.cache.own(UnitTypeId.HATCHERY).amount >= 3:
                 self.response = "roach_ravager_swarmhost"
 
     async def post_update(self):

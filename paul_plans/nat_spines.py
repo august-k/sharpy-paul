@@ -49,11 +49,16 @@ class NatSpines(ActBuilding):
 
     def get_random_build_location(self) -> Point2:
         """
-        4 spines by the natural.
+        4 spines by the natural, unless there's too much enemy there.
 
         Changes the start point and distance.
         """
-        start_point = self.knowledge.expansion_zones[1].center_location
-        center = self.ai.game_info.map_center
-        location = start_point.towards_with_random_angle(center, 4, math.pi / 2)
+        nat = self.knowledge.expansion_zones[1]
+        if nat.known_enemy_power.power <= 2 * nat.our_power.power:
+            start_point = nat.center_location
+            to_loc = self.ai.game_info.map_center
+        else:
+            start_point = self.knowledge.expansion_zones[0].center_location  # our main
+            to_loc = nat.center_location
+        location = start_point.towards_with_random_angle(to_loc, 4, math.pi / 2)
         return location

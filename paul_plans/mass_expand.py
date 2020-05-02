@@ -16,7 +16,7 @@ class MassExpand(BuildOrder):
 
     async def execute(self):
         """Add expansion to expander."""
-        if self.ai.minerals >= 700:
+        if self.ai.minerals >= 900:
             current_bases = self.get_count(UnitTypeId.HATCHERY)
             self.expander.to_count = current_bases + 1
         return await super().execute()

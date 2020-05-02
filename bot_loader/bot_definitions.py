@@ -238,6 +238,8 @@ class BotDefinitions:
             DummyBuilder("oldrusty", "OldRusty", Race.Terran, "rusty.py", Rusty),
             DummyBuilder("tank", "RustyTanks", Race.Terran, "two_base_tanks.py", TwoBaseTanks),
             DummyBuilder("terranturtle", "RustyOneBaseTurtle", Race.Terran, "one_base_turtle.py", OneBaseTurtle),
+            # Pauls
+            DummyBuilder("paul", "Paul", Race.Zerg, "Paul.py", PaulBot),
         ]
 
         for bot in bots:
