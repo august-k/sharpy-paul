@@ -9,8 +9,12 @@ from sc2.player import Race
 from sharpy.plans import BuildOrder, Step, SequentialList, StepBuildGas
 from sharpy.plans.acts import ActExpand, ActBuilding, ActTech
 from sharpy.plans.acts.zerg import ZergUnit, AutoOverLord, MorphLair
-from sharpy.plans.require import RequiredMinerals, UnitExists, RequiredAll, RequiredTechReady
+from sharpy.plans.require import RequiredMinerals, UnitExists, RequiredAll, RequiredTechReady, RequiredTime
 from sharpy.plans.tactics import PlanDistributeWorkers
+from sharpy.plans.tactics.zerg import OverlordScout, LingScout
+from sharpy.plans.tactics.scouting import ScoutLocation
+from paul_plans.roach_rush_response import RoachRushResponse
+from paul_plans.scout_manager import EnemyBuild
 
 if TYPE_CHECKING:
     from sharpy.knowledges import Knowledge
@@ -23,6 +27,15 @@ class PaulBuild(BuildOrder):
 
     def __init__(self):
         self.enemy_nat_scouted = False
+        self.enemy_rushes = {
+            EnemyBuild.GeneralRush,
+            EnemyBuild.Pool12,
+            EnemyBuild.RoachRush,
+            EnemyBuild.LingRush,
+            EnemyBuild.CannonRush,
+            EnemyBuild.EarlyMarines,
+            EnemyBuild.BCRush
+        }
 
         self.drones = ZergUnit(UnitTypeId.DRONE, to_count=0)
         self.lings = ZergUnit(UnitTypeId.ZERGLING, to_count=0)
@@ -55,11 +68,23 @@ class PaulBuild(BuildOrder):
             unit_type=UnitTypeId.SPORECRAWLER, position_type=DefensePosition.BehindMineralLineRight
         )
 
+        self.triple_middle = DefensiveBuilding(
+            unit_type=UnitTypeId.SPORECRAWLER, position_type=DefensePosition.BehindMineralLineCenter, to_count=3
+        )
+
+        bc_air_defense = BuildOrder([
+            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.right_spore, skip_until=self.air_detected,),
+            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.left_spore, skip_until=self.air_detected,),
+            Step(
+                UnitExists(UnitTypeId.SPAWNINGPOOL),
+                self.triple_middle,
+                skip_until=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.BCRush
+            ),
+        ])
+
         hard_order = SequentialList(
             Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.twelve_pool_spines, skip_until=self.twelve_pool_detected),
             Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.defense_spines, skip_until=self.rush_detected,),
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.left_spore, skip_until=self.air_detected,),
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.right_spore, skip_until=self.air_detected,),
             Step(
                 UnitExists(UnitTypeId.SPAWNINGPOOL),
                 ActBuilding(UnitTypeId.ROACHWARREN, 1),
@@ -149,10 +174,31 @@ class PaulBuild(BuildOrder):
             ]
         )
 
-        self.distribution = PlanDistributeWorkers(max_gas=3)
+        scouting = SequentialList(
+            Step(RequiredTime(3 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
+            Step(RequiredTime(4 * 60), LingScout(2, ScoutLocation.scout_enemy3(), ScoutLocation.scout_enemy2())),
+            Step(RequiredTime(6 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
+            Step(RequiredTime(7 * 60), LingScout(2, ScoutLocation.scout_enemy4(), ScoutLocation.scout_enemy3())),
+        )
 
+        self.distribution = PlanDistributeWorkers(max_gas=3)
+        self.roach_response = RoachRushResponse()
+
+        build_steps = BuildOrder(
+            bc_air_defense, hard_order, unit_building, StandardUpgrades(), upgrades, tech_buildings
+        )
         send_order = BuildOrder(
-            hard_order, unit_building, StandardUpgrades(), upgrades, tech_buildings, AutoOverLord(), self.distribution
+            Step(
+                None, self.roach_response, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.RoachRush,
+            ),
+            Step(
+                None,
+                build_steps,
+                skip=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.RoachRush,
+            ),
+            AutoOverLord(),
+            self.distribution,
+            scouting,
         )
 
         super().__init__(send_order)
@@ -173,6 +219,8 @@ class PaulBuild(BuildOrder):
         for b in {UnitTypeId.SPIRE, UnitTypeId.STARGATE, UnitTypeId.STARPORT}:
             if b in self.knowledge.known_enemy_structures:
                 return True
+        if self.ai.scout_manager.enemy_build in {EnemyBuild.BCRush}:
+            return True
         return False
 
     def counter_siege(self, knowledge: "Knowledge"):
@@ -218,7 +266,10 @@ class PaulBuild(BuildOrder):
                     self.enemy_nat_scouted = True
         enemy_buildings = self.knowledge.known_enemy_structures
         if enemy_buildings:
-            if enemy_buildings.closest_distance_to(self.knowledge.zone_manager.expansion_zones[1].center_location) < 40:
+            if (
+                enemy_buildings.closest_distance_to(self.knowledge.zone_manager.expansion_zones[1].center_location)
+                < self.knowledge.rush_distance // 2
+            ):
                 self.enemy_rush = True
             if len(enemy_buildings(UnitTypeId.ROACHWARREN)) > 0 and self.ai.time <= 4 * 60:
                 self.enemy_rush = True
@@ -231,19 +282,26 @@ class PaulBuild(BuildOrder):
 
         return self.enemy_rush
 
+    # def roach_rush_detected(self, knowledge):
+    #     if self.knowledge.managers.scout_manager.enemy_build == EnemyBuild.RoachRush:
+    #         return True
+    #     return False
+
     def should_build_drones(self, knowledge):
-        # drone unless we're under attack, saturated, or we can't take their army and they're nearby
-        if not self.knowledge.game_analyzer.our_power.is_enough_for(self.knowledge.game_analyzer.enemy_predict_power):
-            enemy_mobile = self.knowledge.known_enemy_units_mobile
-            if enemy_mobile:
-                if (
-                    enemy_mobile.closest_distance_to(self.knowledge.zone_manager.expansion_zones[0].center_location)
-                    < 50
-                ):
+        # drone if enemy is BC rushing
+        if self.ai.scout_manager.enemy_build != EnemyBuild.BCRush:
+            # drone unless we're under attack, saturated, or we can't take their army and they're nearby
+            if not self.knowledge.game_analyzer.our_power.is_enough_for(self.knowledge.game_analyzer.enemy_predict_power):
+                enemy_mobile = self.knowledge.known_enemy_units_mobile
+                if enemy_mobile:
+                    if (
+                        enemy_mobile.closest_distance_to(self.knowledge.zone_manager.expansion_zones[0].center_location)
+                        < 50
+                    ):
+                        return False
+            for zone in self.knowledge.zone_manager.expansion_zones:
+                if zone.is_ours and zone.is_under_attack:
                     return False
-        for zone in self.knowledge.zone_manager.expansion_zones:
-            if zone.is_ours and zone.is_under_attack:
-                return False
         target_count = min(
             85,
             self.get_count(UnitTypeId.HATCHERY, include_pending=True, include_not_ready=True) * 16
@@ -264,6 +322,9 @@ class PaulBuild(BuildOrder):
     def should_build_queens(self, knowledge):
         """Hatcheries + 3 queens, max 6"""
         if self.get_count(UnitTypeId.SPAWNINGPOOL):
+            if self.ai.scout_manager.enemy_build == EnemyBuild.BCRush:
+                self.queens.to_count = 12
+                return True
             target_count = min(6, self.get_count(UnitTypeId.HATCHERY) + 3)
             if self.cache.own(UnitTypeId.QUEEN).amount < target_count:
                 self.queens.to_count = target_count

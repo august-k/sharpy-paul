@@ -27,6 +27,7 @@ from sharpy.plans.tactics import (
 from sharpy.plans.tactics.zerg import InjectLarva, SpreadCreep, PlanHeatOverseer
 from paul_plans.single_build_order import PaulBuild
 from paul_plans.mass_expand import MassExpand
+from paul_plans.scout_manager import ScoutManager
 
 
 class PaulBot(KnowledgeBot):
@@ -40,11 +41,11 @@ class PaulBot(KnowledgeBot):
         self.attack.retreat_multiplier = 0.3
         self.build_name = build_name
         self.build_selector = BuildSelector(build_name)
+        self.scout_manager = ScoutManager()
         self.hidden_ol_spots: List[Point2]
         self.hidden_ol_index: int = 0
         self.scout_ling_count = 0
-        self.ling_scout_location: Dict[int, Point2]
-        self.paul_build: BuildOrder
+        self.ling_scout_location: Dict[int, Point2] = {}
 
     async def create_plan(self) -> BuildOrder:
         """Turn plan into BuildOrder."""
@@ -55,11 +56,10 @@ class PaulBot(KnowledgeBot):
             PlanFinishEnemy(),
             PlanWorkerOnlyDefense(),
         ]
-        self.paul_build = PaulBuild()
 
         return BuildOrder(
             [
-                self.paul_build,
+                PaulBuild(),
                 attack_tactics,
                 InjectLarva(),
                 SpreadCreep(),
@@ -77,6 +77,8 @@ class PaulBot(KnowledgeBot):
         """
         await self.real_init()
         self.calculate_overlord_spots()
+        # This is Infy's fault
+        # noinspection PyProtectedMember
         self.hidden_ol_spots.sort(
             key=lambda x: self.knowledge.ai._distance_pos_to_pos(x, self.knowledge.enemy_main_zone.center_location),
         )
@@ -86,6 +88,10 @@ class PaulBot(KnowledgeBot):
             2: self.knowledge.ai.game_info.map_center,
             3: self.knowledge.zone_manager.expansion_zones[2].gather_point,
         }
+        if self.knowledge.ai.watchtowers:
+            self.ling_scout_location[2] = self.knowledge.ai.watchtowers.closest_to(
+                self.knowledge.enemy_expansion_zones[1].center_location
+            )
         if self.knowledge.enemy_race == Race.Zerg:
             self.ling_scout_location[0] = self.knowledge.zone_manager.enemy_expansion_zones[
                 0
@@ -93,7 +99,7 @@ class PaulBot(KnowledgeBot):
 
     def configure_managers(self) -> Optional[List[ManagerBase]]:
         """Add custom managers."""
-        return [self.build_selector]
+        return [self.scout_manager]
 
     async def on_unit_created(self, unit: Unit):
         """Send Overlords and lings to scouting spots."""
@@ -118,14 +124,19 @@ class PaulBot(KnowledgeBot):
                 self.knowledge.roles.set_task(UnitTask.Scouting, unit)
                 self.scout_ling_count += 1
 
-    async def on_enemy_unit_entered_vision(self, unit: Unit):
-        if (
-            not self.paul_build.enemy_rush
-            and unit.can_attack
-            and unit.type_id not in {UnitTypeId.DRONE, UnitTypeId.PROBE, UnitTypeId.SCV}
-        ):
-            if self.knowledge.enemy_units_manager.enemy_total_power.power >= 3 and self.time <= 3 * 60:
-                self.paul_build.enemy_rush = True
+    # async def on_enemy_unit_entered_vision(self, unit: Unit):
+    #     """
+    #     Get scouting information when units enter vision.
+    #
+    #     Called automatically.
+    #     """
+    #     if (
+    #         not self.paul_build.enemy_rush
+    #         and unit.can_attack
+    #         and unit.type_id not in {UnitTypeId.DRONE, UnitTypeId.PROBE, UnitTypeId.SCV}
+    #     ):
+    #         if self.knowledge.enemy_units_manager.enemy_total_power.power >= 3 and self.time <= 3 * 60:
+    #             self.paul_build.enemy_rush = True
 
     def calculate_overlord_spots(self):
         """Calculate hidden overlord spots for scouting."""
