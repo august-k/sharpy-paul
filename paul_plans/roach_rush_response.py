@@ -21,7 +21,7 @@ class RoachRushResponse(BuildOrder):
         self.lings = ZergUnit(UnitTypeId.ZERGLING, to_count=999)
         self.queens = ZergUnit(UnitTypeId.QUEEN, to_count=3)
         self.roaches = ZergUnit(UnitTypeId.ROACH, to_count=100, priority=True)
-        self.ravagers = ZergUnit(UnitTypeId.RAVAGER, to_count=50)
+        self.ravagers = ZergUnit(UnitTypeId.RAVAGER, to_count=0)
         self.defense_spines = DefensiveBuilding(
             unit_type=UnitTypeId.SPINECRAWLER, position_type=DefensePosition.Entrance, to_base_index=1, to_count=3
         )
@@ -31,7 +31,11 @@ class RoachRushResponse(BuildOrder):
             [
                 Step(None, self.drones, skip_until=self.should_build_drones),
                 Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.defense_spines),
-                Step(RequiredAll([UnitExists(UnitTypeId.ROACHWARREN), UnitExists(UnitTypeId.ROACH)]), self.ravagers),
+                Step(
+                    RequiredAll([UnitExists(UnitTypeId.ROACHWARREN), UnitExists(UnitTypeId.ROACH)]),
+                    self.ravagers,
+                    skip_until=self.should_build_ravagers,
+                ),
                 Step(UnitExists(UnitTypeId.ROACHWARREN), self.roaches),
                 Step(
                     RequiredAll(
@@ -79,5 +83,11 @@ class RoachRushResponse(BuildOrder):
             and self.cache.own(UnitTypeId.DRONE).amount >= 16 * self.get_count(UnitTypeId.EXTRACTOR) * 3
         ):
             self.gas.to_count = min(3, self.get_count(UnitTypeId.EXTRACTOR) + 1)
+            return True
+        return False
+
+    def should_build_ravagers(self, knowledge):
+        if self.cache.own(UnitTypeId.ROACH).amount >= 10:
+            self.ravagers.to_count = self.cache.own(UnitTypeId.ROACH).amount // 2
             return True
         return False

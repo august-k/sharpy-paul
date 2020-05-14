@@ -34,7 +34,7 @@ class PaulBuild(BuildOrder):
             EnemyBuild.LingRush,
             EnemyBuild.CannonRush,
             EnemyBuild.EarlyMarines,
-            EnemyBuild.BCRush
+            EnemyBuild.BCRush,
         }
 
         self.drones = ZergUnit(UnitTypeId.DRONE, to_count=0)
@@ -72,15 +72,17 @@ class PaulBuild(BuildOrder):
             unit_type=UnitTypeId.SPORECRAWLER, position_type=DefensePosition.BehindMineralLineCenter, to_count=3
         )
 
-        bc_air_defense = BuildOrder([
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.right_spore, skip_until=self.air_detected,),
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.left_spore, skip_until=self.air_detected,),
-            Step(
-                UnitExists(UnitTypeId.SPAWNINGPOOL),
-                self.triple_middle,
-                skip_until=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.BCRush
-            ),
-        ])
+        bc_air_defense = BuildOrder(
+            [
+                Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.right_spore, skip_until=self.air_detected,),
+                Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.left_spore, skip_until=self.air_detected,),
+                Step(
+                    UnitExists(UnitTypeId.SPAWNINGPOOL),
+                    self.triple_middle,
+                    skip_until=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.BCRush,
+                ),
+            ]
+        )
 
         hard_order = SequentialList(
             Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.twelve_pool_spines, skip_until=self.twelve_pool_detected),
@@ -127,6 +129,7 @@ class PaulBuild(BuildOrder):
 
         tech_buildings = BuildOrder(
             [
+                Step(None, ActBuilding(UnitTypeId.SPAWNINGPOOL, to_count=1)),
                 Step(UnitExists(UnitTypeId.DRONE, 35), ActBuilding(UnitTypeId.ROACHWARREN)),
                 Step(UnitExists(UnitTypeId.ROACHWARREN), ActExpand(3, priority=True, consider_worker_production=False)),
                 Step(UnitExists(UnitTypeId.DRONE, 50), MorphLair()),
@@ -176,6 +179,7 @@ class PaulBuild(BuildOrder):
 
         scouting = SequentialList(
             Step(RequiredTime(3 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
+            Step(RequiredTime(3 * 60), LingScout(1, ScoutLocation.scout_enemy1())),
             Step(RequiredTime(4 * 60), LingScout(2, ScoutLocation.scout_enemy3(), ScoutLocation.scout_enemy2())),
             Step(RequiredTime(6 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
             Step(RequiredTime(7 * 60), LingScout(2, ScoutLocation.scout_enemy4(), ScoutLocation.scout_enemy3())),
@@ -188,14 +192,8 @@ class PaulBuild(BuildOrder):
             bc_air_defense, hard_order, unit_building, StandardUpgrades(), upgrades, tech_buildings
         )
         send_order = BuildOrder(
-            Step(
-                None, self.roach_response, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.RoachRush,
-            ),
-            Step(
-                None,
-                build_steps,
-                skip=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.RoachRush,
-            ),
+            Step(None, self.roach_response, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.RoachRush,),
+            Step(None, build_steps, skip=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.RoachRush,),
             AutoOverLord(),
             self.distribution,
             scouting,
@@ -249,7 +247,9 @@ class PaulBuild(BuildOrder):
             self.defense_spines.to_base_index = min(
                 2, self.get_count(UnitTypeId.HATCHERY, include_not_ready=False, include_pending=False) - 1
             )
-            if not self.get_count(UnitTypeId.ROACHWARREN) and not self.get_count(UnitTypeId.HYDRALISKDEN):
+            if not self.get_count(
+                UnitTypeId.ROACHWARREN, include_not_ready=True, include_pending=True
+            ) and not self.get_count(UnitTypeId.HYDRALISKDEN):
                 self.distribution.max_gas = 0
             else:
                 # full gas if we have a hydra den, 3 if we don't
@@ -291,7 +291,9 @@ class PaulBuild(BuildOrder):
         # drone if enemy is BC rushing
         if self.ai.scout_manager.enemy_build != EnemyBuild.BCRush:
             # drone unless we're under attack, saturated, or we can't take their army and they're nearby
-            if not self.knowledge.game_analyzer.our_power.is_enough_for(self.knowledge.game_analyzer.enemy_predict_power):
+            if not self.knowledge.game_analyzer.our_power.is_enough_for(
+                self.knowledge.game_analyzer.enemy_predict_power
+            ):
                 enemy_mobile = self.knowledge.known_enemy_units_mobile
                 if enemy_mobile:
                     if (
