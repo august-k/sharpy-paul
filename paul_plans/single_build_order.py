@@ -15,6 +15,7 @@ from sharpy.plans.tactics.zerg import OverlordScout, LingScout
 from sharpy.plans.tactics.scouting import ScoutLocation
 from paul_plans.roach_rush_response import RoachRushResponse
 from paul_plans.scout_manager import EnemyBuild
+from paul_plans.roach_ravager_swarmhost import RRSH
 
 if TYPE_CHECKING:
     from sharpy.knowledges import Knowledge
@@ -134,7 +135,7 @@ class PaulBuild(BuildOrder):
                 Step(UnitExists(UnitTypeId.ROACHWARREN), ActExpand(3, priority=True, consider_worker_production=False)),
                 Step(UnitExists(UnitTypeId.DRONE, 50), MorphLair()),
                 Step(UnitExists(UnitTypeId.LAIR), ActBuilding(UnitTypeId.EVOLUTIONCHAMBER, to_count=2)),
-                Step(UnitExists(UnitTypeId.LAIR, include_not_ready=True), StepBuildGas(3)),
+                Step(UnitExists(UnitTypeId.HATCHERY, 3, include_not_ready=False), StepBuildGas(3)),
                 Step(
                     UnitExists(UnitTypeId.LAIR),
                     ActBuilding(UnitTypeId.HYDRALISKDEN, to_count=1),
@@ -185,15 +186,21 @@ class PaulBuild(BuildOrder):
             Step(RequiredTime(7 * 60), LingScout(2, ScoutLocation.scout_enemy4(), ScoutLocation.scout_enemy3())),
         )
 
-        self.distribution = PlanDistributeWorkers(max_gas=3)
+        self.distribution = PlanDistributeWorkers()
         self.roach_response = RoachRushResponse()
+        self.rrsh = RRSH()
 
         build_steps = BuildOrder(
             bc_air_defense, hard_order, unit_building, StandardUpgrades(), upgrades, tech_buildings
         )
         send_order = BuildOrder(
             Step(None, self.roach_response, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.RoachRush,),
-            Step(None, build_steps, skip=lambda k: k.ai.scout_manager.enemy_build == EnemyBuild.RoachRush,),
+            Step(
+                None,
+                build_steps,
+                skip=lambda k: k.ai.scout_manager.enemy_build in {EnemyBuild.RoachRush, EnemyBuild.TankPush},
+            ),
+            Step(None, self.rrsh, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.TankPush),
             AutoOverLord(),
             self.distribution,
             scouting,
@@ -247,14 +254,6 @@ class PaulBuild(BuildOrder):
             self.defense_spines.to_base_index = min(
                 2, self.get_count(UnitTypeId.HATCHERY, include_not_ready=False, include_pending=False) - 1
             )
-            if not self.get_count(
-                UnitTypeId.ROACHWARREN, include_not_ready=True, include_pending=True
-            ) and not self.get_count(UnitTypeId.HYDRALISKDEN):
-                self.distribution.max_gas = 0
-            else:
-                # full gas if we have a hydra den, 3 if we don't
-                self.distribution.max_gas = 21 * self.get_count(UnitTypeId.HYDRALISKDEN) + 3
-            return True
 
         if not self.enemy_nat_scouted:
             enemy_nat = self.knowledge.enemy_expansion_zones[1].center_location
@@ -291,14 +290,12 @@ class PaulBuild(BuildOrder):
         # drone if enemy is BC rushing
         if self.ai.scout_manager.enemy_build != EnemyBuild.BCRush:
             # drone unless we're under attack, saturated, or we can't take their army and they're nearby
-            if not self.knowledge.game_analyzer.our_power.is_enough_for(
-                self.knowledge.game_analyzer.enemy_predict_power
-            ):
+            if not self.knowledge.game_analyzer.our_power.is_enough_for(self.knowledge.game_analyzer.enemy_power):
                 enemy_mobile = self.knowledge.known_enemy_units_mobile
                 if enemy_mobile:
                     if (
                         enemy_mobile.closest_distance_to(self.knowledge.zone_manager.expansion_zones[0].center_location)
-                        < 50
+                        < self.knowledge.rush_distance // 2
                     ):
                         return False
             for zone in self.knowledge.zone_manager.expansion_zones:
@@ -390,7 +387,10 @@ class PaulBuild(BuildOrder):
 
     def should_build_mutas(self, knowledge):
         if self.get_count(UnitTypeId.SPIRE):
-            self.mutas.to_count = 20
+            if not self.knowledge.known_enemy_units(UnitTypeId.BATTLECRUISER):
+                self.mutas.to_count = 20
+            else:
+                self.mutas.to_count = 0
             return True
         return False
 
@@ -407,8 +407,11 @@ class PaulBuild(BuildOrder):
         return False
 
     def should_build_corruptors(self, knowledge):
-        """Doesn't set count above 0 because we're not building them"""
         if self.get_count(UnitTypeId.SPIRE):
+            if self.knowledge.known_enemy_units(UnitTypeId.BATTLECRUISER):
+                self.corruptors.to_count = 20
+            else:
+                self.corruptors.to_count = 0
             return True
         return False
 

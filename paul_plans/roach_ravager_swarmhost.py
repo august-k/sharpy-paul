@@ -112,8 +112,7 @@ class RRSH(BuildOrder):
 
     async def execute(self):
         """Assign amounts of units to build."""
-        if self.get_count(UnitTypeId.INFESTATIONPIT, include_not_ready=True):
-            self.gas.to_count = min((self.get_count(UnitTypeId.HATCHERY) - 1) * 2, 8)
+        self.gas.to_count = min((self.get_count(UnitTypeId.HATCHERY) - 1) * 2, 8)
         # set_this_iteration = set()
         # larva = self.knowledge.unit_cache.own(UnitTypeId.LARVA).amount
         # if not larva:

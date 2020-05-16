@@ -21,6 +21,7 @@ class EnemyBuild(enum.IntEnum):
     # Terran
     EarlyMarines = 6
     BCRush = 7
+    TankPush = 8
 
 
 class ScoutManager(ManagerBase, ABC):
@@ -90,7 +91,18 @@ class ScoutManager(ManagerBase, ABC):
         pass
 
     def terran_scout(self):
-        """ZvT scouting. Not implemented."""
+        """ZvT scouting."""
+        if self.knowledge.enemy_townhalls.amount >= 3:
+            # they've decided to transition
+            self.enemy_build = EnemyBuild.Macro
+
+        if (
+                self.knowledge.known_enemy_units(UnitTypeId.SIEGETANK).amount
+                + self.knowledge.known_enemy_units(UnitTypeId.SIEGETANKSIEGED).amount
+                >= 2
+        ):
+            self.enemy_build = EnemyBuild.TankPush
+
         if self.knowledge.known_enemy_structures(UnitTypeId.FUSIONCORE) and self.ai.time <= 7 * 60:
             self.enemy_build = EnemyBuild.BCRush
 
