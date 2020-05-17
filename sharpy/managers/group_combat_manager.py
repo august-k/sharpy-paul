@@ -64,8 +64,8 @@ class GroupCombatManager(ManagerBase):
         self.unit_micros[UnitTypeId.LURKERMP] = MicroLurkers(knowledge)
         self.unit_micros[UnitTypeId.INFESTOR] = MicroInfestors(knowledge)
         self.unit_micros[UnitTypeId.SWARMHOSTMP] = MicroSwarmHosts(knowledge)
-        self.unit_micros[UnitTypeId.LOCUSTMP] = NoMicro(knowledge)
-        self.unit_micros[UnitTypeId.LOCUSTMPFLYING] = NoMicro(knowledge)
+        self.unit_micros[UnitTypeId.LOCUSTMP] = MicroLocusts(knowledge)
+        self.unit_micros[UnitTypeId.LOCUSTMPFLYING] = MicroLocusts(knowledge)
         self.unit_micros[UnitTypeId.VIPER] = MicroVipers(knowledge)
 
         # Terran
