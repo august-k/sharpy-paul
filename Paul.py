@@ -24,7 +24,7 @@ from sharpy.plans.tactics import (
     PlanZoneDefense,
     PlanZoneGather,
 )
-from sharpy.plans.tactics.zerg import InjectLarva, SpreadCreep, PlanHeatOverseer
+from sharpy.plans.tactics.zerg import InjectLarva, SpreadCreep, PlanHeatOverseer, CounterTerranTie
 from paul_plans.single_build_order import PaulBuild
 from paul_plans.mass_expand import MassExpand
 from paul_plans.scout_manager import ScoutManager
@@ -59,7 +59,7 @@ class PaulBot(KnowledgeBot):
 
         return BuildOrder(
             [
-                PaulBuild(),
+                CounterTerranTie([PaulBuild()]),
                 attack_tactics,
                 InjectLarva(),
                 SpreadCreep(),

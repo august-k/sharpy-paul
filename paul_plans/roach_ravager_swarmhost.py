@@ -2,7 +2,6 @@
 from typing import Set, Union
 
 from sc2.ids.unit_typeid import UnitTypeId
-from sc2.ids.upgrade_id import UpgradeId
 
 from paul_plans.basic_upgrades import StandardUpgrades
 from paul_plans.mass_expand import MassExpand

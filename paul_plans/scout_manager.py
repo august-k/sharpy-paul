@@ -22,6 +22,7 @@ class EnemyBuild(enum.IntEnum):
     EarlyMarines = 6
     BCRush = 7
     TankPush = 8
+    Bio = 9
 
 
 class ScoutManager(ManagerBase, ABC):
@@ -49,27 +50,22 @@ class ScoutManager(ManagerBase, ABC):
 
     async def update(self):
         """Update build detection based on scouting data."""
+        if self.enemy_build == EnemyBuild.Macro and self.ai.is_visible(self.enemy_natural):
+            if self.ai.in_pathing_grid(self.enemy_natural) and self.knowledge.enemy_townhalls.amount == 1:
+                # enemy has not expanded to their natural and we only know of one townhall
+                self.enemy_build = EnemyBuild.GeneralRush
         if self.ai.enemy_race == Race.Zerg:
             self.zerg_scout()
         elif self.ai.enemy_race == Race.Protoss:
             self.protoss_scout()
         elif self.ai.enemy_race == Race.Terran:
             self.terran_scout()
-        if self.enemy_build == EnemyBuild.Macro and self.ai.is_visible(self.enemy_natural):
-            if self.ai.in_pathing_grid(self.enemy_natural) and self.knowledge.enemy_townhalls.amount == 1:
-                # enemy has not expanded to their natural and we only know of one townhall
-                self.enemy_build = EnemyBuild.GeneralRush
 
     async def post_update(self):
         pass
 
     def zerg_scout(self):
         """ZvZ scouting."""
-        if self.knowledge.enemy_townhalls.amount >= 3:
-            # they've decided to transition
-            self.enemy_build = EnemyBuild.Macro
-            return
-
         if (self.knowledge.known_enemy_structures(UnitTypeId.ROACHWARREN) and self.ai.time <= 4 * 60) or (
             self.knowledge.known_enemy_units(UnitTypeId.ROACH) and self.ai.time <= 4 * 60
         ):
@@ -92,16 +88,13 @@ class ScoutManager(ManagerBase, ABC):
 
     def terran_scout(self):
         """ZvT scouting."""
-        if self.knowledge.enemy_townhalls.amount >= 3:
-            # they've decided to transition
-            self.enemy_build = EnemyBuild.Macro
-
         if (
-                self.knowledge.known_enemy_units(UnitTypeId.SIEGETANK).amount
-                + self.knowledge.known_enemy_units(UnitTypeId.SIEGETANKSIEGED).amount
-                >= 2
+            self.knowledge.known_enemy_units(UnitTypeId.SIEGETANK).amount
+            + self.knowledge.known_enemy_units(UnitTypeId.SIEGETANKSIEGED).amount
         ):
             self.enemy_build = EnemyBuild.TankPush
+            if self.knowledge.known_enemy_units(UnitTypeId.MARINE):
+                self.enemy_build = EnemyBuild.Bio
 
         if self.knowledge.known_enemy_structures(UnitTypeId.FUSIONCORE) and self.ai.time <= 7 * 60:
             self.enemy_build = EnemyBuild.BCRush
