@@ -91,7 +91,7 @@ class ScoutManager(ManagerBase, ABC):
     def terran_scout(self):
         """ZvT scouting."""
 
-        if self.knowledge.known_enemy_units(UnitTypeId.MARINE):
+        if self.knowledge.known_enemy_units(UnitTypeId.MARINE) or self.knowledge.known_enemy_units(UnitTypeId.REAPER):
             self.enemy_build = EnemyBuild.Bio
 
         if (
