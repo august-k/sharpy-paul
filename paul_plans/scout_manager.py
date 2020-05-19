@@ -83,18 +83,22 @@ class ScoutManager(ManagerBase, ABC):
             self.enemy_build = EnemyBuild.LingRush
 
     def protoss_scout(self):
-        """ZvP scouting. Not implemented."""
-        pass
+        """ZvP scouting. Not really implemented."""
+        if self.knowledge.known_enemy_units(UnitTypeId.ZEALOT):
+            # yeah, yeah, it's a Terran build. I just want to go Ling Bane. Fight me.
+            self.enemy_build = EnemyBuild.Bio
 
     def terran_scout(self):
         """ZvT scouting."""
+
+        if self.knowledge.known_enemy_units(UnitTypeId.MARINE):
+            self.enemy_build = EnemyBuild.Bio
+
         if (
             self.knowledge.known_enemy_units(UnitTypeId.SIEGETANK).amount
             + self.knowledge.known_enemy_units(UnitTypeId.SIEGETANKSIEGED).amount
-        ):
+        ) and not self.knowledge.known_enemy_units(UnitTypeId.MARINE):
             self.enemy_build = EnemyBuild.TankMech
-            if self.knowledge.known_enemy_units(UnitTypeId.MARINE):
-                self.enemy_build = EnemyBuild.Bio
 
         if self.knowledge.known_enemy_structures(UnitTypeId.FUSIONCORE) and self.ai.time <= 7 * 60:
             self.enemy_build = EnemyBuild.BCRush

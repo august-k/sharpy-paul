@@ -16,7 +16,7 @@ from sharpy.plans.tactics.scouting import ScoutLocation
 from paul_plans.roach_rush_response import RoachRushResponse
 from paul_plans.scout_manager import EnemyBuild
 from paul_plans.roach_ravager_swarmhost import RRSH
-from paul_plans.ling_bane_ultra import LingBaneUltra
+from paul_plans.ling_bane_plus import LingBaneUltraCorruptor
 
 if TYPE_CHECKING:
     from sharpy.knowledges import Knowledge
@@ -193,7 +193,7 @@ class PaulBuild(BuildOrder):
         self.distribution = PlanDistributeWorkers()
         self.roach_response = RoachRushResponse()
         self.rrsh = RRSH()
-        self.lbu = LingBaneUltra()
+        self.lbu = LingBaneUltraCorruptor()
 
         build_steps = BuildOrder(
             bc_air_defense, hard_order, unit_building, StandardUpgrades(), upgrades, tech_buildings
