@@ -1,4 +1,4 @@
-"""Ling Bane into Ultra composition."""
+"""Ling Bane into Ultra/Mutalisks/Corruptors composition."""
 from sc2.ids.unit_typeid import UnitTypeId
 from sc2.ids.upgrade_id import UpgradeId
 
@@ -6,7 +6,7 @@ from paul_plans.mass_expand import MassExpand
 from sharpy.plans import BuildOrder, SequentialList, Step, StepBuildGas
 from sharpy.plans.acts import ActBuilding, ActExpand, ActTech
 from sharpy.plans.acts.zerg import AutoOverLord, MorphLair, ZergUnit, MorphHive
-from sharpy.plans.require import RequiredAll, UnitExists, RequiredTime
+from sharpy.plans.require import RequiredAll, UnitExists, RequiredTechReady
 
 
 class LingBaneUltraCorruptor(BuildOrder):
@@ -40,12 +40,12 @@ class LingBaneUltraCorruptor(BuildOrder):
         )
 
         tech_buildings = BuildOrder(
-            Step(None, ActExpand(3, priority=True, consider_worker_production=False), skip_until=self.enemy_third),
+            Step(None, ActExpand(3, priority=True, consider_worker_production=False), skip_until=self.enemy_expansion),
             Step(None, StepBuildGas(to_count=2)),
             Step(UnitExists(UnitTypeId.LAIR), StepBuildGas(4)),
             Step(None, ActBuilding(UnitTypeId.SPAWNINGPOOL)),
             Step(UnitExists(UnitTypeId.SPAWNINGPOOL), ActBuilding(UnitTypeId.BANELINGNEST)),
-            Step(RequiredTime(5.5 * 60), MorphLair()),
+            Step(UnitExists(UnitTypeId.BANELINGNEST), MorphLair()),
             Step(
                 RequiredAll([UnitExists(UnitTypeId.DRONE, 60), UnitExists(UnitTypeId.LAIR)]),
                 ActBuilding(UnitTypeId.INFESTATIONPIT),
@@ -108,12 +108,13 @@ class LingBaneUltraCorruptor(BuildOrder):
                     ),
                     ActTech(UpgradeId.ZERGFLYERARMORSLEVEL3),
                 ),
-            )
+            ),
+            Step(RequiredTechReady(UpgradeId.CENTRIFICALHOOKS), ActTech(UpgradeId.OVERLORDSPEED)),
         )
 
         super().__init__([upgrades, tech_buildings, build_units, MassExpand(), AutoOverLord()])
 
-    def enemy_third(self, knowledge) -> bool:
+    def enemy_expansion(self, knowledge) -> bool:
         if self.knowledge.enemy_townhalls.amount >= 2:
             return True
         return False
