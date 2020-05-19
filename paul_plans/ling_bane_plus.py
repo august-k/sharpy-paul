@@ -133,22 +133,23 @@ class LingBaneUltraCorruptor(BuildOrder):
     def should_build_air(self, knowledge):
         flier_found = False
         if self.knowledge.enemy_units_manager.enemy_total_power.air_power >= 1:
-            non_medivac_prism = False
+            # non_medivac_prism = False
             for unit in self.knowledge.known_enemy_units:
                 if unit.is_flying and not flier_found:
                     flier_found = True
-                if unit.is_flying and unit.type_id not in {UnitTypeId.MEDIVAC, UnitTypeId.WARPPRISM}:
-                    non_medivac_prism = True
+                # if unit.is_flying and unit.type_id not in {UnitTypeId.MEDIVAC, UnitTypeId.WARPPRISM}:
+                if unit.is_flying:
+                    # non_medivac_prism = True
                     # This one's my fault
                     # noinspection PyProtectedMember
                     self.corruptor.to_count = int(40 * self.knowledge.game_analyzer._enemy_air_percentage)
                     self.mutalisk.to_count = 0
                     break
-            if not non_medivac_prism:
-                self.corruptor.to_count = 0
-                # Also my fault
-                # noinspection PyProtectedMember
-                self.mutalisk.to_count = int(60 * self.knowledge.game_analyzer._enemy_air_percentage)
+            # if not non_medivac_prism:
+            #     self.corruptor.to_count = 0
+            #     # Also my fault
+            #     # noinspection PyProtectedMember
+            #     self.mutalisk.to_count = int(60 * self.knowledge.game_analyzer._enemy_air_percentage)
         return flier_found
 
     def should_build_ultras(self, knowledge):

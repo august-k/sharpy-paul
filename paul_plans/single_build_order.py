@@ -207,7 +207,11 @@ class PaulBuild(BuildOrder):
                 in {EnemyBuild.RoachRush, EnemyBuild.TankMech, EnemyBuild.Bio},
             ),
             Step(None, self.rrsh, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.TankMech),
-            Step(None, self.lbu, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.Bio),
+            Step(
+                None,
+                self.lbu,
+                skip=lambda k: k.ai.scout_manager.enemy_build not in {EnemyBuild.Bio, EnemyBuild.LingRush},
+            ),
             AutoOverLord(),
             self.distribution,
             scouting,
