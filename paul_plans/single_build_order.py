@@ -131,7 +131,10 @@ class PaulBuild(BuildOrder):
 
         tech_buildings = BuildOrder(
             [
-                Step(None, ActBuilding(UnitTypeId.SPAWNINGPOOL, to_count=1)),
+                Step(
+                    UnitExists(UnitTypeId.SPAWNINGPOOL, include_killed=True),
+                    ActBuilding(UnitTypeId.SPAWNINGPOOL, to_count=1),
+                ),
                 Step(UnitExists(UnitTypeId.DRONE, 35), ActBuilding(UnitTypeId.ROACHWARREN)),
                 Step(UnitExists(UnitTypeId.ROACHWARREN), ActExpand(3, priority=True, consider_worker_production=False)),
                 Step(UnitExists(UnitTypeId.DRONE, 50), MorphLair()),
@@ -200,9 +203,10 @@ class PaulBuild(BuildOrder):
             Step(
                 None,
                 build_steps,
-                skip=lambda k: k.ai.scout_manager.enemy_build in {EnemyBuild.RoachRush, EnemyBuild.TankPush, EnemyBuild.Bio},
+                skip=lambda k: k.ai.scout_manager.enemy_build
+                in {EnemyBuild.RoachRush, EnemyBuild.TankMech, EnemyBuild.Bio},
             ),
-            Step(None, self.rrsh, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.TankPush),
+            Step(None, self.rrsh, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.TankMech),
             Step(None, self.lbu, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.Bio),
             AutoOverLord(),
             self.distribution,

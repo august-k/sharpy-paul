@@ -21,7 +21,7 @@ class EnemyBuild(enum.IntEnum):
     # Terran
     EarlyMarines = 6
     BCRush = 7
-    TankPush = 8
+    TankMech = 8
     Bio = 9
 
 
@@ -92,7 +92,7 @@ class ScoutManager(ManagerBase, ABC):
             self.knowledge.known_enemy_units(UnitTypeId.SIEGETANK).amount
             + self.knowledge.known_enemy_units(UnitTypeId.SIEGETANKSIEGED).amount
         ):
-            self.enemy_build = EnemyBuild.TankPush
+            self.enemy_build = EnemyBuild.TankMech
             if self.knowledge.known_enemy_units(UnitTypeId.MARINE):
                 self.enemy_build = EnemyBuild.Bio
 
