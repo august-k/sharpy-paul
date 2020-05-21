@@ -9,7 +9,8 @@ from sc2.position import Point2
 from sc2.unit import Unit
 
 SPREAD_CREEP_ENERGY = 25
-CREEP_TUMOR_MAX_RANGE = 8  # not sure about this
+# changed this from 8 to 10
+CREEP_TUMOR_MAX_RANGE = 10  # not sure about this
 
 
 # todo:
