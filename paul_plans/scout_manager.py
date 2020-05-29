@@ -1,4 +1,5 @@
 """Receive scouting data and identify builds."""
+from typing import Set
 from abc import ABC
 from sc2.position import Point2
 from sc2.player import Race
@@ -9,7 +10,6 @@ import enum
 
 class EnemyBuild(enum.IntEnum):
     """Enum of possible detected builds."""
-
     Macro = 0
     GeneralRush = 1
     # Zerg
@@ -25,17 +25,29 @@ class EnemyBuild(enum.IntEnum):
     Bio = 9
 
 
+class TerranFlags(enum.IntEnum):
+    """Flags for things all builds should account for."""
+    StarportTechLab = 0
+    ProxyBarracks = 1
+    MissingInfoSpore = 2
+    BattleCruisers = 3
+    Gasless = 4
+    OneBaseHeavyGas = 5
+
+
 class ScoutManager(ManagerBase, ABC):
     """Manage scouting information."""
 
     def __init__(self):
         """Set up variables."""
         super().__init__()
+        self.main_seen = False
+        self.flags: Set[int] = set()
         self.enemy_build = EnemyBuild.Macro
         self.enemy_natural: Point2 = Point2((0, 0))
         self.half_rush_point: int = 0
 
-    async def start(self, knowledge: "Knowledge"):
+    async def start(self, knowledge):
         """Set up game data."""
         self.knowledge = knowledge
         self._debug = self.knowledge.config["debug"].getboolean(type(self).__name__)
@@ -91,6 +103,35 @@ class ScoutManager(ManagerBase, ABC):
     def terran_scout(self):
         """ZvT scouting."""
 
+        if not self.main_seen:
+            if self.knowledge.ai.is_visible(self.knowledge.enemy_start_location):
+                self.main_seen = True
+
+        if not self.main_seen and self.ai.time >= 4 * 60:
+            self.flags.add(TerranFlags.MissingInfoSpore)
+
+        if self.main_seen and self.ai.time >= 2 * 60:
+            if not self.knowledge.known_enemy_structures(UnitTypeId.EXTRACTOR):
+                self.flags.add(TerranFlags.Gasless)
+            else:
+                if TerranFlags.Gasless in self.flags:
+                    self.flags.remove(TerranFlags.Gasless)
+
+        if self.knowledge.known_enemy_structures(UnitTypeId.BARRACKS):
+            if (
+                self.knowledge.known_enemy_structures(UnitTypeId.BARRACKS).closest_distance_to(
+                    self.knowledge.expansion_zones[1].center_location
+                )
+                < self.knowledge.rush_distance // 2
+            ):
+                self.flags.add(TerranFlags.ProxyBarracks)
+            else:
+                if TerranFlags.ProxyBarracks in self.flags:
+                    self.flags.remove(TerranFlags.ProxyBarracks)
+
+        if self.knowledge.known_enemy_structures(UnitTypeId.STARPORTTECHLAB):
+            self.flags.add(TerranFlags.StarportTechLab)
+
         if self.knowledge.known_enemy_units(UnitTypeId.MARINE) or self.knowledge.known_enemy_units(UnitTypeId.REAPER):
             self.enemy_build = EnemyBuild.Bio
 
@@ -102,6 +143,8 @@ class ScoutManager(ManagerBase, ABC):
 
         if self.knowledge.known_enemy_structures(UnitTypeId.FUSIONCORE) and self.ai.time <= 7 * 60:
             self.enemy_build = EnemyBuild.BCRush
+            self.flags.add(TerranFlags.BattleCruisers)
 
         if self.knowledge.known_enemy_units(UnitTypeId.BATTLECRUISER) and self.ai.time <= 7 * 60:
             self.enemy_build = EnemyBuild.BCRush
+            self.flags.add(TerranFlags.BattleCruisers)

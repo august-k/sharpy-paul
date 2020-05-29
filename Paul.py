@@ -9,7 +9,9 @@ from sc2.ids.unit_typeid import UnitTypeId
 from sc2.player import Bot, Computer
 from sc2.position import Point2
 from sc2.unit import Unit
+from sc2.ids.ability_id import AbilityId
 from sklearn.cluster import KMeans
+from scipy import spatial
 
 from paul_plans.build_manager import BuildSelector
 from sharpy.knowledges import KnowledgeBot
@@ -46,6 +48,7 @@ class PaulBot(KnowledgeBot):
         self.hidden_ol_index: int = 0
         self.scout_ling_count = 0
         self.ling_scout_location: Dict[int, Point2] = {}
+        self.nydus_spot = Point2
 
     async def create_plan(self) -> BuildOrder:
         """Turn plan into BuildOrder."""
@@ -97,6 +100,9 @@ class PaulBot(KnowledgeBot):
                 0
             ].behind_mineral_position_center
 
+        self.nydus_spot = self.calculate_nydus_spot()
+        # await self.client.debug_create_unit([[UnitTypeId.OVERLORD, 1, self.nydus_spot, 1]])
+
     def configure_managers(self) -> Optional[List[ManagerBase]]:
         """Add custom managers."""
         return [self.scout_manager]
@@ -107,16 +113,21 @@ class PaulBot(KnowledgeBot):
             if self.hidden_ol_index + 1 >= len(self.hidden_ol_spots):
                 return
             else:
-                if self.hidden_ol_index == 0:
-                    self.do(
-                        unit.move(
-                            self.knowledge.zone_manager.enemy_expansion_zones[1].center_location.towards(
-                                self.knowledge.ai.game_info.map_center, 11
-                            )
-                        )
-                    )
-                self.do(unit.move(self.hidden_ol_spots[self.hidden_ol_index], queue=True))
-                self.hidden_ol_index += 1
+                # if self.hidden_ol_index == 0:
+                #     self.do(
+                #         unit.move(
+                #             self.knowledge.zone_manager.enemy_expansion_zones[1].center_location.towards(
+                #                 self.knowledge.ai.game_info.map_center, 11
+                #             )
+                #         )
+                #     )
+                #     self.hidden_ol_index += 1
+                if self.hidden_ol_index == 1:
+                    self.do(unit.move(self.nydus_spot))
+                    self.hidden_ol_index += 1
+                else:
+                    self.do(unit.move(self.hidden_ol_spots[self.hidden_ol_index], queue=True))
+                    self.hidden_ol_index += 1
 
         elif unit.type_id == UnitTypeId.ZERGLING:
             if self.scout_ling_count in self.ling_scout_location:
@@ -257,13 +268,27 @@ class PaulBot(KnowledgeBot):
         dist = np.sqrt(dist)
         return dist
 
+    def calculate_nydus_spot(self) -> Point2:
+        """Find the furthest point from their townhall in their main."""
+        height_map = self.game_info.terrain_height.data_numpy
+        # need a 2d array
+        stand_in = [[x, y] for x in range(height_map.shape[0]) for y in range(height_map.shape[1])]
+        tree = spatial.KDTree(stand_in)
+        points_within_x = tree.query_ball_point(self.enemy_start_locations[0].rounded, 60)
+        target_height = height_map[self.enemy_start_locations[0].rounded]
+        matched_height = [stand_in[point] for point in points_within_x if height_map[tuple(stand_in[point])] == target_height]
+        pathed_height = [point for point in matched_height if self.game_info.pathing_grid[point] == 0]
+        distances = self.calculate_distance_points_from_location(self.knowledge.enemy_expansion_zones[1].center_location, pathed_height)
+        nydus_location = Point2(matched_height[np.where(distances == max(distances))[0][0]])
+        return nydus_location
+
 
 def main():
     """Run things."""
     sc2.run_game(
         sc2.maps.get("TritonLE"),
-        # [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard)],
-        [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard, AIBuild.Rush)],
+        [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryEasy)],
+        # [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard, AIBuild.Rush)],
         realtime=False,
         save_replay_as="Paul2.SC2Replay",
     )

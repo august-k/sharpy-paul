@@ -231,7 +231,7 @@ class BuildDetector(ManagerBase):
             else:
                 return self._set_rush(EnemyRushBuild.Macro)  # enemy has expanded, no rush detection
 
-        if self.ai.time < 3 * 60:
+        if self.ai.time < 120:
             # early game and we have seen enemy CC
             close_barracks = (
                 self.knowledge.known_enemy_structures(UnitTypeId.BARRACKS)

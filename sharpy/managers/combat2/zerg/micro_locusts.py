@@ -1,11 +1,11 @@
 """Micro locusts differently to prevent them from retreating."""
 
-from sharpy.managers.combat2 import Action, MicroStep
+from sharpy.managers.combat2 import Action, GenericMicro
 from sc2.unit import Unit
 from sc2.units import Units
 
 
-class MicroLocusts(MicroStep):
+class MicroLocusts(GenericMicro):
     def group_solve_combat(self, units: Units, current_command: Action) -> Action:
         if self.closest_group:
             return Action(self.closest_group.center, True)

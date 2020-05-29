@@ -174,6 +174,7 @@ class BotDefinitions:
             "debugrestorepower": (lambda params: Bot(Race.Protoss, RestorePowerDummy())),
             "debuguseneural": (lambda params: Bot(Race.Zerg, UseNeuralParasiteDummy())),
             "debugdetectneural": (lambda params: Bot(Race.Protoss, DetectNeuralParasiteDummy())),
+            "debugexpanddummy": (lambda params: Bot(Race.Zerg, ExpandDummy())),
         }
 
         for key, func in debug_bots.items():
@@ -225,6 +226,7 @@ class BotDefinitions:
             DummyBuilder("mutalisk", "BluntFlies", Race.Zerg, "mutalisk.py", MutaliskBot),
             DummyBuilder("workerrush", "BluntWorkers", Race.Zerg, "worker_rush.py", WorkerRush),
             DummyBuilder("lurker", "BluntLurkers", Race.Zerg, "lurkers.py", LurkerBot),
+            DummyBuilder("paul", "Paul", Race.Zerg, "Paul.py", PaulBot),
             # TODO: Not really a functional bot
             # DummyBuilder("spine", "BluntDefender", Race.Zerg, "spine_defender.py", SpineDefender),
             # TODO: Not really Sharpy bot
@@ -238,8 +240,6 @@ class BotDefinitions:
             DummyBuilder("oldrusty", "OldRusty", Race.Terran, "rusty.py", Rusty),
             DummyBuilder("tank", "RustyTanks", Race.Terran, "two_base_tanks.py", TwoBaseTanks),
             DummyBuilder("terranturtle", "RustyOneBaseTurtle", Race.Terran, "one_base_turtle.py", OneBaseTurtle),
-            # Pauls
-            DummyBuilder("paul", "Paul", Race.Zerg, "Paul.py", PaulBot),
         ]
 
         for bot in bots:

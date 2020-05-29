@@ -24,7 +24,7 @@ from sharpy.plans.tactics import (
     PlanZoneDefense,
     PlanZoneGather,
 )
-from sharpy.plans.tactics.zerg import InjectLarva, SpreadCreep, PlanHeatOverseer
+from sharpy.plans.tactics.zerg import InjectLarva, SpreadCreep, PlanHeatOverseer, CounterTerranTie
 from paul_plans.single_build_order import PaulBuild
 from paul_plans.mass_expand import MassExpand
 from paul_plans.scout_manager import ScoutManager
@@ -37,7 +37,7 @@ class PaulBot(KnowledgeBot):
         """Set up attack parameters and name."""
         super().__init__("Paul")
         self.my_race = Race.Zerg
-        self.attack = PlanZoneAttack()
+        self.attack = PlanZoneAttack(200)
         self.attack.retreat_multiplier = 0.3
         self.build_name = build_name
         self.build_selector = BuildSelector(build_name)
@@ -59,7 +59,7 @@ class PaulBot(KnowledgeBot):
 
         return BuildOrder(
             [
-                PaulBuild(),
+                CounterTerranTie([PaulBuild()]),
                 attack_tactics,
                 InjectLarva(),
                 SpreadCreep(),
@@ -262,8 +262,8 @@ def main():
     """Run things."""
     sc2.run_game(
         sc2.maps.get("TritonLE"),
-        # [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard)],
-        [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard, AIBuild.Rush)],
+        [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryEasy)],
+        # [Bot(Race.Zerg, PaulBot()), Computer(Race.Terran, Difficulty.VeryHard, AIBuild.Rush)],
         realtime=False,
         save_replay_as="Paul2.SC2Replay",
     )

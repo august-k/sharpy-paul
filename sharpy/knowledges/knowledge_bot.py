@@ -6,11 +6,15 @@ from abc import abstractmethod
 from sc2.units import Units
 from sharpy.knowledges import Knowledge
 from sharpy.managers import ManagerBase
-from sharpy.plans import BuildOrder
 from config import get_config, get_version
 from sc2 import BotAI, Result, Optional, UnitTypeId, List
 from sc2.unit import Unit
 import time
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from sharpy.knowledges import BuildOrder
 
 
 class KnowledgeBot(BotAI):
@@ -21,7 +25,7 @@ class KnowledgeBot(BotAI):
         self.name = name
         self.config = get_config()
         self.knowledge: Knowledge = None
-        self.plan: BuildOrder = None
+        self.plan: "BuildOrder" = None
         self.knowledge = Knowledge()
         self.start_plan = True
         self.run_custom = False
@@ -65,13 +69,13 @@ class KnowledgeBot(BotAI):
 
         return msg
 
-    async def chat_send(self, message: str):
+    async def chat_send(self, message: str, team_only: bool = False):
         # todo: refactor to use chat manager?
         self.knowledge.print(message, "Chat")
-        await super().chat_send(message)
+        await super().chat_send(message, team_only)
 
     @abstractmethod
-    async def create_plan(self) -> BuildOrder:
+    async def create_plan(self) -> "BuildOrder":
         pass
 
     async def on_before_start(self):

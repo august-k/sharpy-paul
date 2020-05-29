@@ -1,0 +1,667 @@
+Updated version.txt with: 2020-04-23 67e3c91
+Starting game in TritonLE.
+paul vs 200roach
+INFO:sc2.protocol:Client status changed to Status.launched (was None)
+INFO:sc2.controller:Creating new game
+INFO:sc2.controller:Map:     TritonLE
+INFO:sc2.controller:Players: Bot PaulBot(Zerg), Bot MacroRoach(Zerg)
+INFO:sc2.protocol:Client status changed to Status.launched (was None)
+INFO:sc2.protocol:Client status changed to Status.init_game (was Status.launched)
+INFO:sc2.protocol:Client status changed to Status.in_game (was None)
+INFO:root:Player 1 - Bot PaulBot(Zerg)
+INFO:sc2.protocol:Client status changed to Status.in_game (was None)
+INFO:root:Player 2 - Bot MacroRoach(Zerg)
+ERROR:sc2.bot_ai:Error: [<ActionResult.NotSupported: 2>] (action: UnitCommand(AbilityId.LARVATRAIN_DRONE, Unit(name='Hatchery', tag=4347133953), None, False))
+WARNING:sc2.main:[EDGE] [MapInfo] Unknown map
+INFO:sc2.main:[EDGE] 00:00    0ms   50M    0G  12/ 14U [Version] 4.11.4.78285
+INFO:sc2.main:[EDGE] [Knowledge] rush distance: 147.6201171875
+INFO:sc2.main:[EDGE] [Start] My race: Zerg
+INFO:sc2.main:[EDGE] [Start] Opponent race: Zerg
+INFO:sc2.main:[EDGE] [Start] OpponentId: paul-200roach
+INFO:sc2.main:[EDGE] 00:00    0ms   50M    0G  12/ 14U [Knowledge] Completed HATCHERY at (160.5, 46.5)
+ERROR:sc2.bot_ai:Error: [<ActionResult.NotSupported: 2>] (action: UnitCommand(AbilityId.LARVATRAIN_DRONE, Unit(name='Hatchery', tag=4351590401), None, False))
+INFO:sc2.main:[EDGE] 00:00    0ms   50M    0G  12/ 14U [ActUnit] DRONE from LARVA at (161.4, 43.8)
+INFO:sc2.main:[EDGE] 00:01    9ms    0M    0G  13/ 14U [Chat] Paul 2020-04-23 67e3c91
+INFO:sc2.main:[EDGE] 00:11    7ms  100M    0G  13/ 14U [ActUnit] OVERLORD from LARVA at (160.3, 43.6)
+INFO:sc2.main:[EDGE] 00:16    9ms   50M    0G  13/ 14U [ActUnit] DRONE from LARVA at (160.8, 43.7)
+INFO:sc2.main:[EDGE] 00:16    5ms   15M    0G  14/ 14U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 00:29    8ms  170M    0G  14/ 22U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 00:29    8ms  170M    0G  14/ 22U [ActUnit] DRONE from LARVA at (160.8, 43.5)
+INFO:sc2.main:[EDGE] 00:29    6ms  125M    0G  15/ 22U [ActUnit] DRONE from LARVA at (160.7, 43.9)
+INFO:sc2.main:[EDGE] 00:32    7ms  105M    0G  16/ 22U [ActUnit] DRONE from LARVA at (160.5, 43.7)
+INFO:sc2.main:[EDGE] 00:50    6ms  300M    0G  17/ 22U [ActExpand] Expanding to (133.5, 43.5)!
+INFO:sc2.main:[EDGE] 00:50    6ms  305M    0G  17/ 22U [ActExpand] Expanding to (133.5, 43.5)!
+INFO:sc2.main:[EDGE] 00:51    8ms   15M    0G  16/ 22U [Knowledge] Started HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 00:51    8ms   15M    0G  16/ 22U [GameAnalyzer] Income advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 00:53    8ms   55M    0G  16/ 22U [ActUnit] DRONE from LARVA at (160.0, 43.3)
+INFO:sc2.main:[EDGE] 00:56    9ms   50M    0G  17/ 22U [ActUnit] DRONE from LARVA at (160.1, 43.6)
+INFO:sc2.main:[EDGE] 01:10    8ms  200M    0G  18/ 22U [ActBuilding] 1. SPAWNINGPOOL near (152.3, 50.2)
+INFO:sc2.main:[EDGE] 01:13   10ms   50M    0G  18/ 22U [ActUnit] DRONE from LARVA at (160.1, 43.9)
+INFO:sc2.main:[EDGE] 01:13   10ms    5M    0G  18/ 22U [Knowledge] Started SPAWNINGPOOL at (152.5, 50.5)
+INFO:sc2.main:[EDGE] 01:17    9ms   50M    0G  18/ 22U [ActUnit] DRONE from LARVA at (160.2, 43.7)
+INFO:sc2.main:[EDGE] 01:26    6ms  145M    0G  19/ 22U [ActUnit] DRONE from LARVA at (160.5, 43.7)
+INFO:sc2.main:[EDGE] 01:26    9ms  100M    0G  20/ 22U Building EXTRACTOR to (167.5, 49.5)
+INFO:sc2.main:[EDGE] 01:27    8ms   90M    0G  19/ 22U [Knowledge] Started EXTRACTOR at (167.5, 49.5)
+INFO:sc2.main:[EDGE] 01:36    6ms  235M    0G  19/ 22U [ActUnit] DRONE from LARVA at (160.5, 43.6)
+INFO:sc2.main:[EDGE] 01:47    7ms  365M    0G  20/ 22U [ActUnit] OVERLORD from LARVA at (160.5, 43.6)
+INFO:sc2.main:[EDGE] 01:49    6ms  290M    0G  20/ 22U [Knowledge] Completed EXTRACTOR at (167.5, 49.5)
+INFO:sc2.main:[EDGE] 02:00    9ms  445M   16G  20/ 22U [Knowledge] Completed SPAWNINGPOOL at (152.5, 50.5)
+INFO:sc2.main:[EDGE] 02:00    9ms  445M   16G  20/ 22U [ActUnit] QUEEN from HATCHERY at (160.5, 46.5)
+INFO:sc2.main:[EDGE] 02:00   12ms  300M   16G  22/ 22U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 02:02    8ms  350M   24G  22/ 28U [Knowledge] Completed HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 02:02    8ms  350M   24G  22/ 28U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 02:02    8ms  350M   24G  22/ 28U [ActUnit] QUEEN from HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 02:03    7ms  200M   24G  24/ 28U [ActUnit] ZERGLING from LARVA at (133.6, 40.6)
+INFO:sc2.main:[EDGE] 02:03    8ms  150M   24G  25/ 28U [ActUnit] ZERGLING from LARVA at (161.1, 43.3)
+INFO:sc2.main:[EDGE] 02:09    7ms  185M   40G  26/ 36U [ActUnit] ZERGLING from LARVA at (160.5, 43.7)
+INFO:sc2.main:[EDGE] 02:13   11ms  200M   52G  27/ 36U [ActUnit] DRONE from LARVA at (133.5, 40.6)
+INFO:sc2.main:[EDGE] 02:19    9ms  250M   68G  28/ 36U [ActUnit] DRONE from LARVA at (160.5, 43.7)
+INFO:sc2.main:[EDGE] 02:20    9ms  210M   72G  29/ 36U [GameAnalyzer] Known army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 02:20    9ms  210M   72G  29/ 36U [GameAnalyzer] Predicted army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 02:24   10ms  265M   84G  29/ 36U [ActUnit] DRONE from LARVA at (133.5, 40.6)
+INFO:sc2.main:[EDGE] 02:27    8ms  270M   92G  30/ 36U Building EXTRACTOR to (156.5, 39.5)
+INFO:sc2.main:[EDGE] 02:28    9ms  265M   96G  29/ 36U [Knowledge] Started EXTRACTOR at (156.5, 39.5)
+INFO:sc2.main:[EDGE] 02:30   10ms  300M  100G  29/ 36U [ActExpand] Expanding to (103.5, 44.5)!
+INFO:sc2.main:[EDGE] 02:30   11ms  300M  100G  29/ 36U [ActUnit] DRONE from LARVA at (160.5, 43.8)
+INFO:sc2.main:[EDGE] 02:30   11ms  300M  100G  29/ 36U [ActExpand] Expanding to (103.5, 44.5)!
+INFO:sc2.main:[EDGE] 02:32   12ms  270M  104G  30/ 36U [GameAnalyzer] Income advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 02:34   12ms  300M  108G  30/ 36U [ActExpand] Expanding to (103.5, 44.5)!
+INFO:sc2.main:[EDGE] 02:34   15ms  305M  108G  30/ 36U [ActExpand] Expanding to (103.5, 44.5)!
+INFO:sc2.main:[EDGE] 02:35   11ms   25M  112G  30/ 36U Building EXTRACTOR to (126.5, 40.5)
+INFO:sc2.main:[EDGE] 02:35    9ms   10M  112G  30/ 36U [GameAnalyzer] Known army advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 02:35    9ms   10M  112G  30/ 36U [GameAnalyzer] Predicted army advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 02:35    9ms   10M  112G  30/ 36U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 02:38   12ms   40M  120G  29/ 36U [Knowledge] Started EXTRACTOR at (126.5, 40.5)
+INFO:sc2.main:[EDGE] 02:38   13ms   45M  120G  29/ 36U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 02:38   12ms   50M  120G  29/ 36U [ActUnit] DRONE from LARVA at (133.2, 40.1)
+INFO:sc2.main:[EDGE] 02:39   11ms    5M  124G  29/ 36U [Knowledge] Started HATCHERY at (103.5, 44.5)
+INFO:sc2.main:[EDGE] 02:41   13ms   55M  132G  29/ 36U [ActUnit] DRONE from LARVA at (160.4, 43.0)
+INFO:sc2.main:[EDGE] 02:45   15ms   60M  140G  30/ 36U [ActUnit] DRONE from LARVA at (133.5, 40.6)
+INFO:sc2.main:[EDGE] 02:50   15ms   65M  152G  31/ 36U [Knowledge] Completed EXTRACTOR at (156.5, 39.5)
+INFO:sc2.main:[EDGE] 02:51   11ms   90M  156G  31/ 36U [GameAnalyzer] Income advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 02:51   13ms  105M  156G  31/ 36U [ActUnit] DRONE from LARVA at (160.5, 43.6)
+INFO:sc2.main:[EDGE] 02:56   16ms  115M  172G  32/ 36U [ActUnit] DRONE from LARVA at (133.5, 40.6)
+INFO:sc2.main:[EDGE] 03:00   12ms  115M  192G  33/ 36U [Knowledge] Completed EXTRACTOR at (126.5, 40.5)
+INFO:sc2.main:[EDGE] 03:01   13ms  150M  204G  33/ 36U [ActUnit] QUEEN from HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 03:05   11ms   50M  224G  35/ 36U [ActUnit] DRONE from LARVA at (160.4, 43.7)
+INFO:sc2.main:[EDGE] 03:06   16ms   10M  224G  36/ 36U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 03:07   14ms   30M  236G  36/ 36U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 03:10   12ms   70M  260G  36/ 36U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 03:11   14ms   90M  268G  36/ 36U [GameAnalyzer] Predicted army advantage is now Even
+INFO:sc2.main:[EDGE] 03:16   17ms  175M  308G  36/ 36U Building EXTRACTOR to (129.5, 36.5)
+INFO:sc2.main:[EDGE] 03:18   16ms  180M  316G  35/ 36U [Knowledge] Started EXTRACTOR at (129.5, 36.5)
+INFO:sc2.main:[EDGE] 03:18   16ms  180M  316G  35/ 36U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 03:18   16ms  180M  316G  35/ 36U [ActUnit] DRONE from LARVA at (161.7, 43.5)
+INFO:sc2.main:[EDGE] 03:18   19ms  135M  320G  36/ 36U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 03:25   14ms  250M  368G  36/ 36U [ActUnit] OVERLORD from LARVA at (133.2, 40.8)
+INFO:sc2.main:[EDGE] 03:26   12ms  150M  376G  35/ 36U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 03:26   12ms  150M  376G  35/ 36U [ActUnit] DRONE from LARVA at (159.9, 43.7)
+INFO:sc2.main:[EDGE] 03:26   13ms  100M  376G  36/ 36U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 03:35   11ms  255M  440G  36/ 36U [ActTech] Started OVERLORDSPEED
+INFO:sc2.main:[EDGE] 03:37   17ms  190M  356G  36/ 36U [GameAnalyzer] Predicted army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 03:39   17ms  215M  368G  36/ 36U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 03:39   12ms  220M  376G  36/ 36U [Knowledge] Completed EXTRACTOR at (129.5, 36.5)
+INFO:sc2.main:[EDGE] 03:39   16ms  220M  376G  36/ 36U [Knowledge] Started CREEPTUMORQUEEN at (133.5, 46.5)
+INFO:sc2.main:[EDGE] 03:43   12ms  290M  412G  36/ 44U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 03:43   12ms  290M  412G  36/ 44U [ActUnit] DRONE from LARVA at (161.8, 43.6)
+INFO:sc2.main:[EDGE] 03:43   12ms  290M  412G  36/ 44U [ActUnit] QUEEN from HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 03:44   17ms   95M  412G  39/ 44U [ActUnit] DRONE from LARVA at (134.1, 40.9)
+INFO:sc2.main:[EDGE] 03:44   12ms   50M  412G  40/ 44U [Knowledge] Started CREEPTUMORQUEEN at (129.5, 44.5)
+INFO:sc2.main:[EDGE] 03:44   12ms   50M  412G  40/ 44U [ActUnit] DRONE from LARVA at (134.1, 40.9)
+INFO:sc2.main:[EDGE] 03:46   15ms   50M  436G  41/ 44U [ActUnit] DRONE from LARVA at (132.1, 41.3)
+INFO:sc2.main:[EDGE] 03:50   15ms   50M  460G  42/ 44U [ActUnit] DRONE from LARVA at (161.4, 43.6)
+INFO:sc2.main:[EDGE] 03:50   18ms    0M  460G  43/ 44U [Knowledge] Completed CREEPTUMORQUEEN at (133.5, 46.5)
+INFO:sc2.main:[EDGE] 03:50   12ms    0M  464G  43/ 50U [Knowledge] Completed HATCHERY at (103.5, 44.5)
+INFO:sc2.main:[EDGE] 03:52   15ms   50M  484G  43/ 50U [ActUnit] DRONE from LARVA at (159.2, 44.2)
+INFO:sc2.main:[EDGE] 03:55   14ms   40M  496G  44/ 50U [Knowledge] Completed CREEPTUMORQUEEN at (129.5, 44.5)
+INFO:sc2.main:[EDGE] 03:55   18ms   50M  508G  44/ 50U [ActUnit] DRONE from LARVA at (160.6, 43.4)
+INFO:sc2.main:[EDGE] 03:56   17ms    5M  508G  45/ 50U [GameAnalyzer] Income advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 03:58   15ms   50M  524G  45/ 50U [ActUnit] DRONE from LARVA at (160.3, 43.2)
+INFO:sc2.main:[EDGE] 04:01   39ms   50M  560G  46/ 50U [ActUnit] DRONE from LARVA at (134.5, 40.7)
+INFO:sc2.main:[EDGE] 04:02   15ms   25M  564G  47/ 50U [Knowledge] Started CREEPTUMOR at (132.5, 51.5)
+INFO:sc2.main:[EDGE] 04:03   16ms   50M  572G  47/ 50U [ActUnit] DRONE from LARVA at (103.0, 41.7)
+INFO:sc2.main:[EDGE] 04:07   16ms   55M  604G  48/ 50U [Knowledge] Started CREEPTUMOR at (124.5, 46.5)
+INFO:sc2.main:[EDGE] 04:07   16ms   55M  604G  48/ 50U [ActUnit] DRONE from LARVA at (160.3, 43.9)
+INFO:sc2.main:[EDGE] 04:09   15ms   50M  628G  49/ 50U [ActUnit] DRONE from LARVA at (103.2, 41.9)
+INFO:sc2.main:[EDGE] 04:09   15ms   50M  628G  49/ 50U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 04:09   14ms    0M  628G  50/ 50U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 04:10   15ms   20M  644G  50/ 50U [Knowledge] Started CREEPTUMORQUEEN at (129.5, 48.5)
+INFO:sc2.main:[EDGE] 04:11   16ms   20M  644G  50/ 50U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 04:13   17ms   60M  664G  50/ 50U [Knowledge] Completed CREEPTUMOR at (132.5, 51.5)
+INFO:sc2.main:[EDGE] 04:13   16ms   60M  672G  50/ 50U [GameAnalyzer] Known army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 04:13   16ms   60M  672G  50/ 50U [GameAnalyzer] Predicted army advantage is now Even
+INFO:sc2.main:[EDGE] 04:13   15ms   75M  676G  50/ 50U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 04:17   19ms  160M  712G  50/ 50U [Knowledge] Completed CREEPTUMOR at (124.5, 46.5)
+INFO:sc2.main:[EDGE] 04:19   17ms  195M  740G  50/ 50U [GameAnalyzer] Known army advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 04:19   17ms  195M  740G  50/ 50U [GameAnalyzer] Predicted army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 04:19   17ms  195M  740G  50/ 50U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 04:21   17ms  235M  760G  50/ 50U [Knowledge] Completed CREEPTUMORBURROWED at (129.5, 48.5)
+INFO:sc2.main:[EDGE] 04:25   20ms  345M  804G  50/ 50U [Knowledge] Started CREEPTUMOR at (128.5, 56.5)
+INFO:sc2.main:[EDGE] 04:30   18ms  450M  852G  50/ 50U [Knowledge] Started CREEPTUMOR at (121.5, 53.5)
+INFO:sc2.main:[EDGE] 04:33   25ms  560M  888G  50/ 50U [Knowledge] Started CREEPTUMOR at (124.5, 51.5)
+INFO:sc2.main:[EDGE] 04:35   24ms  600M  916G  50/ 50U [ActBuilding] 1. ROACHWARREN near (106.8, 52.9)
+INFO:sc2.main:[EDGE] 04:36   35ms  450M  916G  50/ 50U [Knowledge] Completed CREEPTUMOR at (128.5, 56.5)
+INFO:sc2.main:[EDGE] 04:39   33ms  560M  952G  50/ 50U [GameAnalyzer] Known army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 04:39   33ms  560M  952G  50/ 50U [GameAnalyzer] Predicted army advantage is now SlightDisadvantage
+INFO:sc2.main:[EDGE] 04:40   31ms  575M  960G  49/ 50U [Knowledge] Started ROACHWARREN at (106.5, 52.5)
+INFO:sc2.main:[EDGE] 04:40   31ms  575M  960G  49/ 50U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 04:40   31ms  575M  960G  49/ 50U [ActUnit] DRONE from LARVA at (159.9, 43.4)
+INFO:sc2.main:[EDGE] 04:40   20ms  525M  964G  50/ 50U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 04:40   17ms  530M  968G  50/ 50U [Knowledge] Completed CREEPTUMORBURROWED at (121.5, 53.5)
+INFO:sc2.main:[EDGE] 04:42   24ms  455M  884G  50/ 50U [ActBuilding] 1. EVOLUTIONCHAMBER near (112.1, 47.3)
+INFO:sc2.main:[EDGE] 04:42   30ms  380M  892G  50/ 50U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 04:43   21ms  400M  900G  50/ 50U [ActUnit] OVERLORD from LARVA at (104.0, 41.7)
+INFO:sc2.main:[EDGE] 04:44   27ms  305M  908G  50/ 50U [Knowledge] Completed CREEPTUMORBURROWED at (124.5, 51.5)
+INFO:sc2.main:[EDGE] 04:47   21ms  400M  940G  50/ 50U [Knowledge] Started CREEPTUMORQUEEN at (104.5, 52.5)
+INFO:sc2.main:[EDGE] 04:47   21ms  400M  940G  50/ 50U [ActUnit] OVERLORD from LARVA at (161.3, 43.7)
+INFO:sc2.main:[EDGE] 04:48   24ms  325M  948G  50/ 50U [Knowledge] Started CREEPTUMOR at (122.5, 59.5)
+INFO:sc2.main:[EDGE] 04:48   24ms  325M  948G  50/ 50U [GameAnalyzer] Income advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 04:49   20ms  345M  960G  49/ 50U [Knowledge] Started EVOLUTIONCHAMBER at (110.5, 51.5)
+INFO:sc2.main:[EDGE] 04:49   20ms  345M  960G  49/ 50U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 04:49   20ms  345M  960G  49/ 50U [ActUnit] DRONE from LARVA at (131.9, 41.5)
+INFO:sc2.main:[EDGE] 04:49   18ms  295M  964G  50/ 50U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 04:51   29ms  345M  984G  50/ 50U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 04:52   26ms  365M  992G  50/ 50U [GameAnalyzer] Income advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 04:52   29ms  365M  996G  50/ 50U [Knowledge] Started CREEPTUMOR at (116.5, 55.5)
+INFO:sc2.main:[EDGE] 04:53   23ms  400M 1000G  50/ 42U [ActUnit] OVERLORD from LARVA at (134.8, 41.0)
+INFO:sc2.main:[EDGE] 04:56   21ms  370M 1032G  50/ 42U [Knowledge] Started CREEPTUMOR at (124.5, 56.5)
+INFO:sc2.main:[EDGE] 04:56   24ms  370M 1032G  50/ 42U [GameAnalyzer] Income advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 04:58   21ms  420M 1056G  50/ 42U [Knowledge] Completed CREEPTUMORQUEEN at (104.5, 52.5)
+INFO:sc2.main:[EDGE] 04:58   20ms  445M 1060G  50/ 42U [Knowledge] Completed CREEPTUMOR at (122.5, 59.5)
+INFO:sc2.main:[EDGE] 05:03   21ms  535M 1108G  50/ 50U [Knowledge] Completed CREEPTUMOR at (116.5, 55.5)
+INFO:sc2.main:[EDGE] 05:05   22ms  600M 1128G  50/ 50U [GameAnalyzer] Known army advantage is now SlightDisadvantage
+INFO:sc2.main:[EDGE] 05:05   22ms  600M 1128G  50/ 50U [GameAnalyzer] Predicted army advantage is now SmallDisadvantage
+INFO:sc2.main:[EDGE] 05:05   23ms  605M 1132G  50/ 58U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 05:05   23ms  605M 1132G  50/ 58U [ActUnit] DRONE from LARVA at (103.2, 41.6)
+INFO:sc2.main:[EDGE] 05:05   23ms  605M 1132G  50/ 58U [ActUnit] QUEEN from HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 05:05   24ms  420M 1140G  53/ 58U [ActUnit] DRONE from LARVA at (133.2, 40.2)
+INFO:sc2.main:[EDGE] 05:05   24ms  420M 1140G  53/ 58U [ActUnit] QUEEN from HATCHERY at (103.5, 44.5)
+INFO:sc2.main:[EDGE] 05:06   25ms  225M 1140G  56/ 58U [ActUnit] DRONE from LARVA at (159.1, 44.2)
+INFO:sc2.main:[EDGE] 05:06   25ms  225M 1140G  56/ 58U [ActUnit] OVERLORD from LARVA at (159.8, 43.9)
+INFO:sc2.main:[EDGE] 05:06   22ms   75M 1140G  57/ 58U [ActUnit] DRONE from LARVA at (161.3, 43.8)
+INFO:sc2.main:[EDGE] 05:06   21ms   35M 1144G  58/ 58U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 05:06   20ms   45M 1144G  58/ 58U [Knowledge] Completed CREEPTUMORBURROWED at (124.5, 56.5)
+INFO:sc2.main:[EDGE] 05:10   22ms  150M 1188G  58/ 58U [Knowledge] Started CREEPTUMOR at (99.5, 54.5)
+INFO:sc2.main:[EDGE] 05:10   26ms  155M 1192G  58/ 58U [Knowledge] Started CREEPTUMOR at (122.5, 64.5)
+INFO:sc2.main:[EDGE] 05:11   21ms  165M 1192G  58/ 66U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 05:11   21ms  165M 1192G  58/ 66U [ActUnit] DRONE from LARVA at (104.1, 41.9)
+INFO:sc2.main:[EDGE] 05:11   24ms  115M 1192G  59/ 66U [ActUnit] DRONE from LARVA at (104.3, 41.8)
+INFO:sc2.main:[EDGE] 05:11   22ms   75M 1196G  60/ 66U [ActUnit] DRONE from LARVA at (134.0, 40.8)
+INFO:sc2.main:[EDGE] 05:12   21ms   60M 1208G  61/ 66U [ActUnit] DRONE from LARVA at (159.3, 43.4)
+INFO:sc2.main:[EDGE] 05:14   25ms   45M 1232G  62/ 66U [Knowledge] Completed EVOLUTIONCHAMBER at (110.5, 51.5)
+INFO:sc2.main:[EDGE] 05:14   25ms   45M 1232G  62/ 66U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 05:14   22ms   55M 1236G  62/ 66U [ActUnit] DRONE from LARVA at (102.4, 41.3)
+INFO:sc2.main:[EDGE] 05:15   22ms   30M 1240G  63/ 66U [Knowledge] Started CREEPTUMOR at (113.5, 60.5)
+INFO:sc2.main:[EDGE] 05:16   22ms   50M 1248G  63/ 66U [ActUnit] DRONE from LARVA at (159.0, 43.6)
+INFO:sc2.main:[EDGE] 05:17   22ms   40M 1256G  64/ 66U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 05:18   22ms   50M 1272G  64/ 66U [GameAnalyzer] Income advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 05:18   22ms   50M 1272G  64/ 66U [ActUnit] DRONE from LARVA at (104.5, 41.9)
+INFO:sc2.main:[EDGE] 05:19   21ms   15M 1284G  65/ 66U [Knowledge] Started CREEPTUMOR at (119.5, 61.5)
+INFO:sc2.main:[EDGE] 05:19   25ms   20M 1284G  65/ 66U [Knowledge] Completed ROACHWARREN at (106.5, 52.5)
+INFO:sc2.main:[EDGE] 05:20   27ms   55M 1288G  65/ 66U [ActUnit] DRONE from LARVA at (134.9, 40.6)
+INFO:sc2.main:[EDGE] 05:20   22ms    5M 1288G  66/ 66U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 05:21   26ms   40M 1304G  66/ 66U [Knowledge] Completed CREEPTUMOR at (99.5, 54.5)
+INFO:sc2.main:[EDGE] 05:21   25ms   40M 1304G  66/ 66U [Knowledge] Completed CREEPTUMOR at (122.5, 64.5)
+INFO:sc2.main:[EDGE] 05:23   27ms   80M 1320G  66/ 66U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 05:24   24ms   95M 1336G  66/ 74U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 05:24   24ms   95M 1336G  66/ 74U [ActUnit] DRONE from LARVA at (132.9, 40.4)
+INFO:sc2.main:[EDGE] 05:24   25ms   55M 1336G  67/ 74U [ActUnit] DRONE from LARVA at (134.3, 40.9)
+INFO:sc2.main:[EDGE] 05:25   23ms   50M 1352G  68/ 74U [ActUnit] DRONE from LARVA at (159.5, 43.9)
+INFO:sc2.main:[EDGE] 05:26   22ms   10M 1352G  69/ 74U [Knowledge] Completed CREEPTUMORBURROWED at (113.5, 60.5)
+INFO:sc2.main:[EDGE] 05:27   23ms   50M 1368G  69/ 74U [ActUnit] DRONE from LARVA at (133.1, 40.9)
+INFO:sc2.main:[EDGE] 05:29   23ms   70M 1384G  70/ 74U [ActUnit] DRONE from LARVA at (133.2, 40.9)
+INFO:sc2.main:[EDGE] 05:29   27ms   20M 1396G  71/ 74U [Knowledge] Completed CREEPTUMORBURROWED at (119.5, 61.5)
+INFO:sc2.main:[EDGE] 05:30   24ms   50M 1404G  71/ 74U [ActUnit] DRONE from LARVA at (103.0, 41.3)
+INFO:sc2.main:[EDGE] 05:32   24ms   50M 1428G  72/ 74U [ActUnit] DRONE from LARVA at (159.3, 44.1)
+INFO:sc2.main:[EDGE] 05:33   27ms   45M 1444G  73/ 74U [Knowledge] Started CREEPTUMOR at (93.5, 56.5)
+INFO:sc2.main:[EDGE] 05:33   27ms   45M 1444G  73/ 74U [Knowledge] Started CREEPTUMOR at (119.5, 70.5)
+INFO:sc2.main:[EDGE] 05:34   23ms   55M 1444G  73/ 74U [ActUnit] DRONE from LARVA at (132.8, 40.3)
+INFO:sc2.main:[EDGE] 05:34   23ms   20M 1444G  74/ 74U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 05:36   24ms  100M 1476G  74/ 74U [ActUnit] OVERLORD from LARVA at (103.2, 41.8)
+INFO:sc2.main:[EDGE] 05:38   26ms   45M 1484G  74/ 74U [Knowledge] Started CREEPTUMOR at (107.5, 63.5)
+INFO:sc2.main:[EDGE] 05:39   23ms  105M 1496G  74/ 74U [ActUnit] OVERLORD from LARVA at (159.4, 44.0)
+INFO:sc2.main:[EDGE] 05:39   23ms   15M 1504G  74/ 74U [Knowledge] Completed LAIR at (160.5, 46.5)
+INFO:sc2.main:[EDGE] 05:41   23ms   70M 1524G  74/ 74U [GameAnalyzer] Known army advantage is now Even
+INFO:sc2.main:[EDGE] 05:41   23ms   70M 1524G  74/ 74U [GameAnalyzer] Predicted army advantage is now SlightDisadvantage
+INFO:sc2.main:[EDGE] 05:41   29ms   75M 1528G  74/ 74U [Knowledge] Started CREEPTUMOR at (112.5, 65.5)
+INFO:sc2.main:[EDGE] 05:42   24ms  105M 1532G  74/ 74U [ActBuilding] 1. INFESTATIONPIT near (124.5, 43.5)
+INFO:sc2.main:[EDGE] 05:44   24ms   80M 1456G  73/ 74U [Knowledge] Completed CREEPTUMOR at (119.5, 70.5)
+INFO:sc2.main:[EDGE] 05:44   24ms   80M 1456G  73/ 74U [Knowledge] Started INFESTATIONPIT at (124.5, 43.5)
+INFO:sc2.main:[EDGE] 05:44   24ms   80M 1456G  73/ 74U [Knowledge] Completed CREEPTUMOR at (93.5, 56.5)
+INFO:sc2.main:[EDGE] 05:44   24ms   80M 1456G  73/ 74U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 05:44   24ms   80M 1456G  73/ 74U [ActUnit] DRONE from LARVA at (133.2, 40.9)
+INFO:sc2.main:[EDGE] 05:44   29ms   35M 1460G  74/ 74U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 05:46   27ms   85M 1472G  74/ 74U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 05:46   25ms   85M 1472G  74/ 74U [Knowledge] Started CREEPTUMORQUEEN at (97.5, 43.5)
+INFO:sc2.main:[EDGE] 05:46   27ms  100M 1476G  74/ 74U [ActUnit] OVERLORD from LARVA at (160.3, 43.8)
+INFO:sc2.main:[EDGE] 05:47   27ms   25M 1484G  74/ 74U [Knowledge] Started CREEPTUMORQUEEN at (130.5, 45.5)
+INFO:sc2.main:[EDGE] 05:48   25ms   80M 1496G  74/ 74U [Knowledge] Completed CREEPTUMOR at (107.5, 63.5)
+INFO:sc2.main:[EDGE] 05:49   26ms   90M 1504G  74/ 74U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 05:49   25ms  100M 1504G  74/ 74U [ActTech] Started ZERGMISSILEWEAPONSLEVEL1
+INFO:sc2.main:[EDGE] 05:52   26ms  115M 1436G  74/ 74U [Knowledge] Completed CREEPTUMOR at (112.5, 65.5)
+INFO:sc2.main:[EDGE] 05:54   29ms  215M 1464G  74/ 82U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 05:54   29ms  215M 1464G  74/ 82U [ActUnit] ROACH from LARVA at (134.5, 40.6)
+INFO:sc2.main:[EDGE] 05:54   29ms  215M 1464G  74/ 82U [ActUnit] ZERGLING from LARVA at (132.6, 40.9)
+INFO:sc2.main:[EDGE] 05:55   26ms  110M 1443G  77/ 82U [ActUnit] ROACH from LARVA at (159.5, 44.0)
+INFO:sc2.main:[EDGE] 05:55   30ms   50M 1426G  79/ 82U [ActUnit] ZERGLING from LARVA at (104.2, 41.5)
+INFO:sc2.main:[EDGE] 05:56   26ms   40M 1434G  80/ 82U [Knowledge] Started CREEPTUMOR at (88.5, 58.5)
+INFO:sc2.main:[EDGE] 05:56   31ms   50M 1438G  80/ 82U [Knowledge] Started CREEPTUMOR at (112.5, 71.5)
+INFO:sc2.main:[EDGE] 05:56   31ms   50M 1438G  80/ 82U [ActUnit] ZERGLING from LARVA at (133.1, 40.9)
+INFO:sc2.main:[EDGE] 05:57   27ms   25M 1442G  81/ 82U [Knowledge] Completed CREEPTUMORQUEEN at (97.5, 43.5)
+INFO:sc2.main:[EDGE] 05:57   26ms   50M 1446G  81/ 90U [ActUnit] ZERGLING from LARVA at (104.0, 41.3)
+INFO:sc2.main:[EDGE] 05:58   29ms    0M 1450G  82/ 90U [Knowledge] Completed CREEPTUMORQUEEN at (130.5, 45.5)
+INFO:sc2.main:[EDGE] 05:58   28ms   20M 1454G  82/ 90U [Knowledge] Started CREEPTUMORQUEEN at (130.5, 40.5)
+INFO:sc2.main:[EDGE] 05:59   29ms   70M 1462G  82/ 90U [ActUnit] ZERGLING from LARVA at (160.8, 43.7)
+INFO:sc2.main:[EDGE] 06:00   30ms   60M 1478G  83/ 90U [ActUnit] ZERGLING from LARVA at (132.3, 40.3)
+INFO:sc2.main:[EDGE] 06:00   26ms   10M 1482G  84/ 90U [Knowledge] Started CREEPTUMOR at (104.5, 68.5)
+INFO:sc2.main:[EDGE] 06:01   26ms   65M 1486G  84/ 90U [ActUnit] ZERGLING from LARVA at (103.9, 41.8)
+INFO:sc2.main:[EDGE] 06:02   28ms   50M 1498G  85/ 90U [ActUnit] ZERGLING from LARVA at (103.9, 41.6)
+INFO:sc2.main:[EDGE] 06:03   27ms   50M 1510G  86/ 90U [ActUnit] ZERGLING from LARVA at (160.7, 43.7)
+INFO:sc2.main:[EDGE] 06:04   28ms   50M 1518G  87/ 90U [ActUnit] ZERGLING from LARVA at (102.6, 41.4)
+INFO:sc2.main:[EDGE] 06:04   27ms    5M 1522G  88/ 98U [Knowledge] Started CREEPTUMOR at (108.5, 68.5)
+INFO:sc2.main:[EDGE] 06:06   27ms   65M 1538G  88/ 98U [ActUnit] ZERGLING from LARVA at (159.6, 43.9)
+INFO:sc2.main:[EDGE] 06:06   30ms   50M 1546G  89/ 98U [ActUnit] ZERGLING from LARVA at (133.3, 40.2)
+INFO:sc2.main:[EDGE] 06:07   31ms   10M 1546G  90/ 98U [Knowledge] Completed CREEPTUMOR at (88.5, 58.5)
+INFO:sc2.main:[EDGE] 06:07   27ms   20M 1550G  90/ 98U [Knowledge] Completed CREEPTUMOR at (112.5, 71.5)
+INFO:sc2.main:[EDGE] 06:09   31ms  105M 1570G  90/ 98U [Knowledge] Completed CREEPTUMORQUEEN at (130.5, 40.5)
+INFO:sc2.main:[EDGE] 06:09   30ms  105M 1570G  90/ 98U [Knowledge] Started CREEPTUMOR at (99.5, 48.5)
+INFO:sc2.main:[EDGE] 06:09   32ms  130M 1578G  90/ 98U [ActUnit] OVERLORD from LARVA at (160.5, 43.6)
+INFO:sc2.main:[EDGE] 06:10   28ms   50M 1586G  90/ 98U [Knowledge] Started CREEPTUMOR at (129.5, 52.5)
+INFO:sc2.main:[EDGE] 06:11   29ms  105M 1594G  90/ 98U [Knowledge] Completed CREEPTUMORBURROWED at (104.5, 68.5)
+INFO:sc2.main:[EDGE] 06:11   31ms  115M 1598G  90/ 98U [ActUnit] OVERLORD from LARVA at (103.5, 41.6)
+INFO:sc2.main:[EDGE] 06:13   35ms   90M 1614G  90/ 98U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 06:14   35ms  120M 1626G  90/ 98U [GameAnalyzer] Known army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 06:14   35ms  120M 1626G  90/ 98U [GameAnalyzer] Predicted army advantage is now Even
+INFO:sc2.main:[EDGE] 06:15   39ms  155M 1634G  90/ 98U [GameAnalyzer] Predicted army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 06:15   36ms  170M 1634G  90/ 98U [Knowledge] Completed CREEPTUMORBURROWED at (108.5, 68.5)
+INFO:sc2.main:[EDGE] 06:16   37ms  230M 1646G  90/ 98U [GameAnalyzer] Known army advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 06:16   37ms  240M 1650G  90/ 98U [ActUnit] ROACH from LARVA at (161.5, 43.6)
+INFO:sc2.main:[EDGE] 06:16   43ms  140M 1550G  93/ 98U [ActUnit] ROACH from LARVA at (159.7, 43.9)
+INFO:sc2.main:[EDGE] 06:17   37ms   90M 1533G  95/ 98U [ActUnit] ROACH from LARVA at (133.3, 40.2)
+INFO:sc2.main:[EDGE] 06:18   36ms   45M 1516G  97/ 98U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 06:19   37ms  105M 1528G  97/ 98U [ActUnit] ZERGLING from LARVA at (159.9, 43.7)
+INFO:sc2.main:[EDGE] 06:19   42ms   55M 1532G  98/ 98U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 06:19   38ms   60M 1532G  98/ 98U [Knowledge] Started CREEPTUMOR at (81.5, 62.5)
+INFO:sc2.main:[EDGE] 06:19   38ms   60M 1532G  98/ 98U [Knowledge] Started CREEPTUMOR at (111.5, 76.5)
+INFO:sc2.main:[EDGE] 06:20   41ms   70M 1536G  98/ 98U [Knowledge] Completed CREEPTUMORBURROWED at (99.5, 48.5)
+INFO:sc2.main:[EDGE] 06:20   32ms   80M 1540G  98/ 98U [Knowledge] Completed INFESTATIONPIT at (124.5, 43.5)
+INFO:sc2.main:[EDGE] 06:20   38ms  105M 1540G  98/ 98U [ActUnit] OVERLORD from LARVA at (104.0, 41.4)
+INFO:sc2.main:[EDGE] 06:20   32ms   45M 1548G  98/ 98U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 06:21   42ms   45M 1548G  98/ 98U [GameAnalyzer] Predicted army advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 06:21   39ms   50M 1548G  98/ 98U [Knowledge] Completed CREEPTUMORBURROWED at (129.5, 52.5)
+INFO:sc2.main:[EDGE] 06:21   39ms   65M 1552G  98/ 98U [Knowledge] Started CREEPTUMOR at (126.5, 43.5)
+INFO:sc2.main:[EDGE] 06:22   38ms   95M 1564G  98/ 98U [GameAnalyzer] Predicted army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 06:23   34ms  160M 1576G  98/ 98U [Knowledge] Started CREEPTUMOR at (103.5, 73.5)
+INFO:sc2.main:[EDGE] 06:26   35ms  290M 1608G  98/ 98U [Knowledge] Started CREEPTUMORQUEEN at (94.5, 48.5)
+INFO:sc2.main:[EDGE] 06:27   34ms  345M 1620G  98/ 98U [Knowledge] Started CREEPTUMOR at (108.5, 76.5)
+INFO:sc2.main:[EDGE] 06:27   34ms  355M 1620G  98/106U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 06:27   34ms  355M 1620G  98/106U [ActUnit] SWARMHOSTMP from LARVA at (133.7, 40.2)
+INFO:sc2.main:[EDGE] 06:27   34ms  355M 1620G  98/106U [ActUnit] ROACH from LARVA at (103.7, 41.6)
+INFO:sc2.main:[EDGE] 06:27   34ms  355M 1620G  98/106U [ActUnit] ZERGLING from LARVA at (104.7, 41.9)
+INFO:sc2.main:[EDGE] 06:28   38ms  145M 1524G 104/106U [ActUnit] ROACH from LARVA at (161.2, 43.7)
+INFO:sc2.main:[EDGE] 06:28   38ms  145M 1524G 104/106U [ActUnit] ZERGLING from LARVA at (103.8, 41.5)
+INFO:sc2.main:[EDGE] 06:28   33ms   80M 1499G 106/106U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 06:29   37ms  110M 1511G 106/106U [ActUnit] OVERLORD from LARVA at (103.8, 41.5)
+INFO:sc2.main:[EDGE] 06:30   34ms   45M 1519G 106/114U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 06:30   36ms   55M 1519G 106/114U [Knowledge] Completed CREEPTUMOR at (81.5, 62.5)
+INFO:sc2.main:[EDGE] 06:30   36ms   55M 1519G 106/114U [Knowledge] Completed CREEPTUMOR at (111.5, 76.5)
+INFO:sc2.main:[EDGE] 06:31   36ms  130M 1539G 106/114U [Knowledge] Started CREEPTUMOR at (96.5, 52.5)
+INFO:sc2.main:[EDGE] 06:32   37ms  160M 1547G 106/114U [Knowledge] Completed CREEPTUMORBURROWED at (126.5, 43.5)
+INFO:sc2.main:[EDGE] 06:34   32ms  240M 1563G 106/114U [Knowledge] Completed CREEPTUMORBURROWED at (103.5, 73.5)
+INFO:sc2.main:[EDGE] 06:35   37ms  285M 1575G 106/114U [Knowledge] Started CREEPTUMOR at (127.5, 60.5)
+INFO:sc2.main:[EDGE] 06:36   36ms  325M 1583G 106/114U [GameAnalyzer] Predicted army advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 06:36   33ms  350M 1591G 106/114U [ActTech] Started BURROW
+INFO:sc2.main:[EDGE] 06:36   33ms  270M 1495G 106/114U [GameAnalyzer] Known army advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 06:37   34ms  290M 1499G 106/114U [Knowledge] Completed CREEPTUMORQUEEN at (94.5, 48.5)
+INFO:sc2.main:[EDGE] 06:38   35ms  330M 1511G 106/122U [Knowledge] Completed CREEPTUMORBURROWED at (108.5, 76.5)
+INFO:sc2.main:[EDGE] 06:41   35ms  480M 1547G 106/122U [ActUnit] SWARMHOSTMP from LARVA at (160.3, 43.4)
+INFO:sc2.main:[EDGE] 06:41   35ms  480M 1547G 106/122U [ActUnit] ROACH from LARVA at (133.3, 40.5)
+INFO:sc2.main:[EDGE] 06:41   34ms  315M 1447G 111/122U [ActUnit] SWARMHOSTMP from LARVA at (103.9, 41.1)
+INFO:sc2.main:[EDGE] 06:42   37ms  250M 1380G 114/122U [Knowledge] Started CREEPTUMOR at (105.5, 78.5)
+INFO:sc2.main:[EDGE] 06:42   37ms  250M 1380G 114/122U [Knowledge] Completed CREEPTUMOR at (96.5, 52.5)
+INFO:sc2.main:[EDGE] 06:43   38ms  300M 1392G 114/122U [Knowledge] Started CREEPTUMOR at (77.5, 65.5)
+INFO:sc2.main:[EDGE] 06:43   33ms  285M 1321G 115/122U [ActUnit] SWARMHOSTMP from LARVA at (134.5, 40.9)
+INFO:sc2.main:[EDGE] 06:43   33ms  285M 1321G 115/122U [ActUnit] ROACH from LARVA at (133.8, 40.6)
+INFO:sc2.main:[EDGE] 06:43   34ms  110M 1221G 120/122U [ActUnit] ROACH from LARVA at (160.6, 43.6)
+INFO:sc2.main:[EDGE] 06:44   38ms   40M 1200G 122/122U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 06:44   33ms   55M 1200G 122/122U [Knowledge] Started CREEPTUMOR at (121.5, 45.5)
+INFO:sc2.main:[EDGE] 06:45   34ms  100M 1204G 122/122U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 06:45   34ms  120M 1212G 122/122U [Knowledge] Completed CREEPTUMOR at (127.5, 60.5)
+INFO:sc2.main:[EDGE] 06:46   34ms  130M 1220G 122/122U [Knowledge] Started CREEPTUMOR at (98.5, 76.5)
+INFO:sc2.main:[EDGE] 06:47   33ms  200M 1232G 122/130U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 06:47   33ms  200M 1232G 122/130U [ActUnit] SWARMHOSTMP from LARVA at (134.0, 40.4)
+INFO:sc2.main:[EDGE] 06:47   33ms  200M 1232G 122/130U [ActUnit] ROACH from LARVA at (132.9, 40.7)
+INFO:sc2.main:[EDGE] 06:48   34ms   95M 1148G 127/130U [ActUnit] ROACH from LARVA at (160.2, 43.7)
+INFO:sc2.main:[EDGE] 06:49   33ms   75M 1135G 129/130U [Knowledge] Started CREEPTUMOR at (89.5, 53.5)
+INFO:sc2.main:[EDGE] 06:49   33ms   75M 1135G 129/130U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 06:50   35ms  100M 1143G 129/130U [Knowledge] Started CREEPTUMOR at (101.5, 79.5)
+INFO:sc2.main:[EDGE] 06:51   39ms  100M 1076G 130/130U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 06:52   39ms  185M 1092G 130/130U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 06:53   36ms  195M 1096G 130/130U [Knowledge] Completed CREEPTUMOR at (105.5, 78.5)
+INFO:sc2.main:[EDGE] 06:53   35ms  210M 1100G 130/130U [ActUnit] OVERLORD from LARVA at (103.8, 41.0)
+INFO:sc2.main:[EDGE] 06:54   39ms  145M 1108G 130/130U [Knowledge] Completed CREEPTUMORBURROWED at (77.5, 65.5)
+INFO:sc2.main:[EDGE] 06:54   40ms  175M 1116G 130/130U [Knowledge] Completed CREEPTUMOR at (121.5, 45.5)
+INFO:sc2.main:[EDGE] 06:55   40ms  200M 1120G 130/130U [ActUnit] OVERLORD from LARVA at (161.6, 44.0)
+INFO:sc2.main:[EDGE] 06:56   37ms  155M 1132G 130/130U [GameAnalyzer] Predicted army advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 06:56   37ms  160M 1132G 130/130U [Knowledge] Completed CREEPTUMORBURROWED at (98.5, 76.5)
+INFO:sc2.main:[EDGE] 06:57   40ms  205M 1144G 130/130U [ActUnit] OVERLORD from LARVA at (160.5, 43.4)
+INFO:sc2.main:[EDGE] 06:57   37ms  120M 1148G 130/130U [Knowledge] Started CREEPTUMOR at (126.5, 66.5)
+INFO:sc2.main:[EDGE] 07:00   36ms  230M 1176G 130/130U [Knowledge] Completed CREEPTUMOR at (89.5, 53.5)
+INFO:sc2.main:[EDGE] 07:01   41ms  280M 1184G 130/130U [Knowledge] Completed CREEPTUMOR at (101.5, 79.5)
+INFO:sc2.main:[EDGE] 07:05   40ms  470M 1228G 130/130U [Knowledge] Started CREEPTUMOR at (98.5, 80.5)
+INFO:sc2.main:[EDGE] 07:06   38ms  495M 1240G 130/130U [Knowledge] Started CREEPTUMOR at (73.5, 69.5)
+INFO:sc2.main:[EDGE] 07:07   42ms  555M 1256G 130/130U [Knowledge] Started CREEPTUMOR at (116.5, 51.5)
+INFO:sc2.main:[EDGE] 07:08   40ms  580M 1260G 130/130U [GameAnalyzer] Known army advantage is now OverwhelmingAdvantage
+INFO:sc2.main:[EDGE] 07:08   39ms  585M 1260G 130/130U [Knowledge] Completed CREEPTUMORBURROWED at (126.5, 66.5)
+INFO:sc2.main:[EDGE] 07:08   42ms  595M 1268G 130/130U [Knowledge] Started CREEPTUMOR at (93.5, 79.5)
+INFO:sc2.main:[EDGE] 07:09   42ms  640M 1272G 130/130U [GameAnalyzer] Known army advantage is now ClearAdvantage
+INFO:sc2.main:[EDGE] 07:10   41ms  675M 1284G 130/130U [GameAnalyzer] Known army advantage is now OverwhelmingAdvantage
+INFO:sc2.main:[EDGE] 07:10   41ms  705M 1288G 130/130U [ActExpand] Expanding to (144.5, 71.5)!
+INFO:sc2.main:[EDGE] 07:11   45ms  425M 1292G 130/138U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:11   45ms  425M 1292G 130/138U [ActUnit] DRONE from LARVA at (103.6, 41.9)
+INFO:sc2.main:[EDGE] 07:11   45ms  425M 1292G 130/138U [ActUnit] SWARMHOSTMP from LARVA at (103.8, 41.4)
+INFO:sc2.main:[EDGE] 07:11   45ms  425M 1292G 130/138U [ActUnit] ROACH from LARVA at (160.2, 43.3)
+INFO:sc2.main:[EDGE] 07:11   40ms  215M 1196G 136/138U [ActUnit] DRONE from LARVA at (103.8, 41.4)
+INFO:sc2.main:[EDGE] 07:11   40ms  215M 1196G 136/138U [ActUnit] ROACH from LARVA at (134.3, 40.9)
+INFO:sc2.main:[EDGE] 07:11   42ms  180M 1200G 137/138U [ActUnit] DRONE from LARVA at (133.6, 40.6)
+INFO:sc2.main:[EDGE] 07:11   43ms  135M 1200G 138/138U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 07:12   41ms  160M 1208G 138/138U [Knowledge] Started CREEPTUMOR at (84.5, 57.5)
+INFO:sc2.main:[EDGE] 07:13   43ms  190M 1216G 138/146U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:13   43ms  190M 1216G 138/146U [ActUnit] DRONE from LARVA at (134.4, 40.8)
+INFO:sc2.main:[EDGE] 07:13   43ms  190M 1216G 138/146U [ActUnit] SWARMHOSTMP from LARVA at (161.0, 43.8)
+INFO:sc2.main:[EDGE] 07:13   41ms   60M 1145G 142/146U [Knowledge] Started CREEPTUMOR at (96.5, 84.5)
+INFO:sc2.main:[EDGE] 07:15   41ms  110M 1157G 142/146U [ActUnit] DRONE from LARVA at (133.5, 40.7)
+INFO:sc2.main:[EDGE] 07:15   46ms   65M 1161G 143/146U [ActUnit] DRONE from LARVA at (134.4, 40.8)
+INFO:sc2.main:[EDGE] 07:16   40ms   50M 1173G 144/154U [Knowledge] Completed CREEPTUMORBURROWED at (98.5, 80.5)
+INFO:sc2.main:[EDGE] 07:16   40ms   50M 1173G 144/154U [ActUnit] DRONE from LARVA at (133.0, 40.4)
+INFO:sc2.main:[EDGE] 07:16   43ms   50M 1177G 145/154U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 07:16   41ms   55M 1181G 145/154U [Knowledge] Completed CREEPTUMORBURROWED at (73.5, 69.5)
+INFO:sc2.main:[EDGE] 07:16   41ms   55M 1181G 145/154U [ActUnit] DRONE from LARVA at (160.5, 43.7)
+INFO:sc2.main:[EDGE] 07:18   39ms   50M 1193G 146/154U [Knowledge] Completed CREEPTUMOR at (116.5, 51.5)
+INFO:sc2.main:[EDGE] 07:19   40ms  100M 1205G 146/154U [ActUnit] DRONE from LARVA at (133.5, 40.6)
+INFO:sc2.main:[EDGE] 07:19   45ms   50M 1209G 147/154U [Knowledge] Completed CREEPTUMOR at (93.5, 79.5)
+INFO:sc2.main:[EDGE] 07:20   42ms   80M 1213G 147/154U [ActUnit] DRONE from LARVA at (160.5, 43.6)
+INFO:sc2.main:[EDGE] 07:20   40ms   50M 1213G 148/154U [ActUnit] DRONE from LARVA at (161.3, 43.8)
+INFO:sc2.main:[EDGE] 07:20   42ms   10M 1221G 149/154U [Knowledge] Started CREEPTUMOR at (126.5, 72.5)
+INFO:sc2.main:[EDGE] 07:21   42ms   60M 1229G 149/154U [ActUnit] DRONE from LARVA at (159.8, 43.1)
+INFO:sc2.main:[EDGE] 07:21   42ms   60M 1229G 149/154U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 07:22   53ms   55M 1241G 150/154U [ActUnit] DRONE from LARVA at (104.9, 41.4)
+INFO:sc2.main:[EDGE] 07:22   50ms    5M 1245G 150/154U [Knowledge] Started HATCHERY at (144.5, 71.5)
+INFO:sc2.main:[EDGE] 07:23   52ms   15M 1245G 150/154U [Knowledge] Completed CREEPTUMOR at (84.5, 57.5)
+INFO:sc2.main:[EDGE] 07:23   81ms   55M 1253G 150/154U [ActUnit] DRONE from LARVA at (103.3, 41.5)
+INFO:sc2.main:[EDGE] 07:24   55ms   30M 1261G 151/154U [Knowledge] Completed CREEPTUMOR at (96.5, 84.5)
+INFO:sc2.main:[EDGE] 07:24   50ms   45M 1261G 151/154U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 07:24   51ms   50M 1261G 151/154U [ActUnit] DRONE from LARVA at (101.7, 42.3)
+INFO:sc2.main:[EDGE] 07:25   52ms   55M 1277G 152/154U [ActUnit] DRONE from LARVA at (102.1, 41.8)
+INFO:sc2.main:[EDGE] 07:28   46ms   95M 1301G 153/154U [Knowledge] Started CREEPTUMOR at (93.5, 83.5)
+INFO:sc2.main:[EDGE] 07:28   41ms  110M 1305G 153/154U [ActUnit] DRONE from LARVA at (160.5, 43.6)
+INFO:sc2.main:[EDGE] 07:28   43ms   75M 1305G 154/154U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 07:28   66ms   90M 1309G 154/154U [Knowledge] Started CREEPTUMOR at (70.5, 74.5)
+INFO:sc2.main:[EDGE] 07:30   55ms  140M 1321G 154/154U [GameAnalyzer] Known army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 07:30   55ms  140M 1321G 154/154U [GameAnalyzer] Predicted army advantage is now SlightAdvantage
+INFO:sc2.main:[EDGE] 07:30   48ms  170M 1329G 154/154U [Knowledge] Started CREEPTUMOR at (109.5, 55.5)
+INFO:sc2.main:[EDGE] 07:31   45ms  180M 1333G 154/154U [Knowledge] Completed CREEPTUMORBURROWED at (126.5, 72.5)
+INFO:sc2.main:[EDGE] 07:31   50ms  215M 1341G 154/154U [Knowledge] Started CREEPTUMOR at (92.5, 87.5)
+INFO:sc2.main:[EDGE] 07:35   47ms  380M 1377G 154/154U [GameAnalyzer] Known army advantage is now SlightDisadvantage
+INFO:sc2.main:[EDGE] 07:35   47ms  380M 1377G 154/154U [GameAnalyzer] Predicted army advantage is now SmallDisadvantage
+INFO:sc2.main:[EDGE] 07:35   51ms  390M 1381G 154/154U [Knowledge] Started CREEPTUMOR at (86.5, 62.5)
+INFO:sc2.main:[EDGE] 07:37   46ms  475M 1401G 154/154U [Knowledge] Started CREEPTUMOR at (89.5, 88.5)
+INFO:sc2.main:[EDGE] 07:38   49ms  535M 1413G 154/154U [GameAnalyzer] Income advantage is now OverwhelmingAdvantage
+INFO:sc2.main:[EDGE] 07:38   71ms  540M 1417G 154/154U [Knowledge] Completed CREEPTUMORBURROWED at (93.5, 83.5)
+INFO:sc2.main:[EDGE] 07:39   69ms  590M 1429G 154/154U [Knowledge] Completed CREEPTUMORBURROWED at (70.5, 74.5)
+INFO:sc2.main:[EDGE] 07:40   69ms  625M 1433G 154/154U [GameAnalyzer] Predicted army advantage is now SlightDisadvantage
+INFO:sc2.main:[EDGE] 07:40   57ms  625M 1433G 154/154U [GameAnalyzer] Known army advantage is now SmallDisadvantage
+INFO:sc2.main:[EDGE] 07:40   57ms  625M 1433G 154/154U [GameAnalyzer] Predicted army advantage is now SmallDisadvantage
+INFO:sc2.main:[EDGE] 07:41   52ms  660M 1445G 154/154U [Knowledge] Completed CREEPTUMOR at (109.5, 55.5)
+INFO:sc2.main:[EDGE] 07:42   74ms  740M 1461G 154/154U [Knowledge] Completed CREEPTUMORBURROWED at (92.5, 87.5)
+INFO:sc2.main:[EDGE] 07:43   99ms  765M 1465G 154/154U [Knowledge] Started CREEPTUMOR at (126.5, 79.5)
+INFO:sc2.main:[EDGE] 07:45   54ms  880M 1485G 153/154U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:45   91ms  870M 1418G 154/154U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 07:45   86ms  880M 1418G 154/154U [Knowledge] Completed CREEPTUMOR at (86.5, 62.5)
+INFO:sc2.main:[EDGE] 07:46   94ms  880M 1422G 154/154U [ActBuilding] 2. EVOLUTIONCHAMBER near (135.8, 69.3)
+WARNING:sc2.main:[EDGE] [LAG] Step 10440 took 102 ms.
+INFO:sc2.main:[EDGE] 07:46  103ms  810M 1422G 154/154U [GameAnalyzer] Income advantage is now ClearAdvantage
+WARNING:sc2.main:[EDGE] [LAG] Step 10444 took 102 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10452 took 103 ms.
+INFO:sc2.main:[EDGE] 07:46  103ms  835M 1426G 154/154U Building EXTRACTOR to (96.5, 41.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10460 took 104 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10464 took 116 ms.
+INFO:sc2.main:[EDGE] 07:47  116ms  830M 1434G 154/154U Building EXTRACTOR to (99.5, 37.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10468 took 116 ms.
+INFO:sc2.main:[EDGE] 07:47   95ms  850M 1442G 154/154U [Knowledge] Completed CREEPTUMORBURROWED at (89.5, 88.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10480 took 127 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10484 took 134 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10488 took 148 ms.
+INFO:sc2.main:[EDGE] 07:48  149ms  875M 1446G 153/154U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:48   99ms  950M 1450G 152/154U [ActUnit] QUEEN from HATCHERY at (103.5, 44.5)
+INFO:sc2.main:[EDGE] 07:48   99ms  950M 1450G 152/154U [ActUnit] ROACH from LARVA at (133.4, 40.2)
+INFO:sc2.main:[EDGE] 07:48   99ms  950M 1450G 152/154U [ActUnit] ZERGLING from LARVA at (102.9, 41.8)
+INFO:sc2.main:[EDGE] 07:48   99ms  950M 1450G 152/154U [ActBuilding] 2. EVOLUTIONCHAMBER near (124.6, 44.8)
+INFO:sc2.main:[EDGE] 07:48   99ms  875M 1450G 152/154U [ActUnit] OVERLORD from LARVA at (134.9, 41.0)
+WARNING:sc2.main:[EDGE] [LAG] Step 10496 took 102 ms.
+INFO:sc2.main:[EDGE] 07:48  103ms  640M 1450G 152/154U [Knowledge] Started EXTRACTOR at (99.5, 37.5)
+INFO:sc2.main:[EDGE] 07:48  103ms  640M 1450G 152/154U [ActUnit] ROACH from LARVA at (133.3, 40.3)
+INFO:sc2.main:[EDGE] 07:48  103ms  640M 1450G 152/154U [ActUnit] ZERGLING from LARVA at (133.6, 40.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10500 took 101 ms.
+INFO:sc2.main:[EDGE] 07:48  103ms  565M 1429G 153/154U [Knowledge] Started EXTRACTOR at (96.5, 41.5)
+INFO:sc2.main:[EDGE] 07:48  103ms  565M 1429G 153/154U [ActUnit] ZERGLING from LARVA at (103.2, 41.6)
+WARNING:sc2.main:[EDGE] [LAG] Step 10504 took 150 ms.
+INFO:sc2.main:[EDGE] 07:49  151ms  570M 1429G 153/154U [ActUnit] ZERGLING from LARVA at (161.0, 43.7)
+WARNING:sc2.main:[EDGE] [LAG] Step 10508 took 149 ms.
+INFO:sc2.main:[EDGE] 07:49  150ms  585M 1433G 153/154U [ActUnit] ZERGLING from LARVA at (133.6, 40.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10512 took 154 ms.
+INFO:sc2.main:[EDGE] 07:49  155ms  590M 1433G 152/154U [ActUnit] ROACH from LARVA at (161.0, 43.7)
+WARNING:sc2.main:[EDGE] [LAG] Step 10516 took 152 ms.
+INFO:sc2.main:[EDGE] 07:49  152ms  535M 1408G 154/154U [SupplyBlock] Started
+WARNING:sc2.main:[EDGE] [LAG] Step 10520 took 153 ms.
+INFO:sc2.main:[EDGE] 07:49  153ms  555M 1408G 153/154U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:49  153ms  555M 1408G 153/154U [ActUnit] ZERGLING from LARVA at (103.2, 41.9)
+WARNING:sc2.main:[EDGE] [LAG] Step 10524 took 100 ms.
+INFO:sc2.main:[EDGE] 07:50  101ms  560M 1416G 153/154U [ActUnit] ZERGLING from LARVA at (132.5, 40.3)
+WARNING:sc2.main:[EDGE] [LAG] Step 10528 took 149 ms.
+INFO:sc2.main:[EDGE] 07:50  150ms  565M 1416G 153/154U [ActUnit] ZERGLING from LARVA at (103.2, 41.9)
+WARNING:sc2.main:[EDGE] [LAG] Step 10532 took 148 ms.
+INFO:sc2.main:[EDGE] 07:50  149ms  630M 1341G 152/154U [ActUnit] ROACH from LARVA at (132.5, 40.3)
+INFO:sc2.main:[EDGE] 07:50  149ms  630M 1341G 152/154U [ActUnit] ZERGLING from LARVA at (160.6, 43.5)
+INFO:sc2.main:[EDGE] 07:50  149ms  630M 1341G 152/154U [ActBuilding] 2. EVOLUTIONCHAMBER near (132.9, 52.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10536 took 151 ms.
+INFO:sc2.main:[EDGE] 07:50  152ms  560M 1320G 153/154U [ActUnit] ZERGLING from LARVA at (132.9, 40.9)
+INFO:sc2.main:[EDGE] 07:50  152ms  560M 1320G 153/154U [ActBuilding] 2. EVOLUTIONCHAMBER near (138.6, 78.3)
+INFO:sc2.main:[EDGE] 07:50  152ms  485M 1320G 153/154U [ActUnit] OVERLORD from LARVA at (132.5, 40.3)
+INFO:sc2.main:[EDGE] 07:50   98ms  395M 1320G 153/154U [Knowledge] Started CREEPTUMOR at (88.5, 85.5)
+INFO:sc2.main:[EDGE] 07:50   98ms  395M 1320G 153/154U [ActUnit] ZERGLING from LARVA at (103.8, 41.2)
+WARNING:sc2.main:[EDGE] [LAG] Step 10544 took 137 ms.
+INFO:sc2.main:[EDGE] 07:50  138ms  395M 1324G 151/154U [ActUnit] QUEEN from HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 07:50  138ms  395M 1324G 151/154U [ActUnit] SWARMHOSTMP from LARVA at (160.6, 43.5)
+INFO:sc2.main:[EDGE] 07:50  138ms  395M 1324G 151/154U [ActUnit] ROACH from LARVA at (103.9, 41.1)
+WARNING:sc2.main:[EDGE] [LAG] Step 10548 took 138 ms.
+INFO:sc2.main:[EDGE] 07:51  139ms  245M 1324G 152/154U [ActUnit] ROACH from LARVA at (104.0, 41.1)
+WARNING:sc2.main:[EDGE] [LAG] Step 10552 took 134 ms.
+INFO:sc2.main:[EDGE] 07:51  135ms  175M 1299G 154/154U [SupplyBlock] Started
+WARNING:sc2.main:[EDGE] [LAG] Step 10556 took 131 ms.
+INFO:sc2.main:[EDGE] 07:51  131ms  255M 1307G 153/154U [SupplyBlock] Ended
+WARNING:sc2.main:[EDGE] [LAG] Step 10560 took 134 ms.
+INFO:sc2.main:[EDGE] 07:51  135ms  245M 1232G 154/154U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 07:51  135ms  245M 1232G 154/154U [ActBuilding] 2. EVOLUTIONCHAMBER near (151.8, 48.7)
+WARNING:sc2.main:[EDGE] [LAG] Step 10564 took 148 ms.
+INFO:sc2.main:[EDGE] 07:51  149ms  185M 1232G 153/154U [Knowledge] Started CREEPTUMOR at (68.5, 80.5)
+INFO:sc2.main:[EDGE] 07:51  149ms  185M 1232G 153/154U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:51  149ms  185M 1232G 153/154U [ActUnit] ZERGLING from LARVA at (104.0, 41.1)
+WARNING:sc2.main:[EDGE] [LAG] Step 10568 took 131 ms.
+INFO:sc2.main:[EDGE] 07:51  132ms  155M 1232G 153/154U [ActUnit] ZERGLING from LARVA at (161.4, 43.8)
+WARNING:sc2.main:[EDGE] [LAG] Step 10572 took 131 ms.
+INFO:sc2.main:[EDGE] 07:52  132ms  130M 1157G 154/154U [SupplyBlock] Started
+INFO:sc2.main:[EDGE] 07:52  132ms  130M 1157G 154/154U [ActUnit] OVERLORD from LARVA at (161.6, 43.8)
+WARNING:sc2.main:[EDGE] [LAG] Step 10576 took 125 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10580 took 126 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10588 took 124 ms.
+INFO:sc2.main:[EDGE] 07:52  125ms   65M 1169G 153/154U [SupplyBlock] Ended
+INFO:sc2.main:[EDGE] 07:52  125ms   65M 1169G 153/154U [ActUnit] ZERGLING from LARVA at (160.4, 43.7)
+WARNING:sc2.main:[EDGE] [LAG] Step 10592 took 123 ms.
+INFO:sc2.main:[EDGE] 07:53  124ms   15M 1173G 154/154U [SupplyBlock] Started
+WARNING:sc2.main:[EDGE] [LAG] Step 10596 took 122 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10600 took 114 ms.
+INFO:sc2.main:[EDGE] 07:53  115ms   30M 1173G 153/154U [SupplyBlock] Ended
+WARNING:sc2.main:[EDGE] [LAG] Step 10604 took 114 ms.
+INFO:sc2.main:[EDGE] 07:53  115ms   40M 1173G 153/154U [Knowledge] Started CREEPTUMOR at (110.5, 61.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10608 took 120 ms.
+INFO:sc2.main:[EDGE] 07:53  121ms   60M 1177G 152/154U [Knowledge] Started EVOLUTIONCHAMBER at (151.5, 46.5)
+INFO:sc2.main:[EDGE] 07:53  121ms   60M 1177G 152/154U [Knowledge] Completed CREEPTUMOR at (126.5, 79.5)
+INFO:sc2.main:[EDGE] 07:53  121ms   60M 1177G 152/154U [GameAnalyzer] Predicted army advantage is now ClearDisadvantage
+INFO:sc2.main:[EDGE] 07:53  121ms   60M 1177G 152/154U [ActUnit] ZERGLING from LARVA at (132.1, 40.7)
+WARNING:sc2.main:[EDGE] [LAG] Step 10612 took 113 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10616 took 110 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10620 took 117 ms.
+INFO:sc2.main:[EDGE] 07:54  118ms   50M 1181G 153/154U [ActUnit] ZERGLING from LARVA at (159.6, 43.9)
+WARNING:sc2.main:[EDGE] [LAG] Step 10624 took 115 ms.
+INFO:sc2.main:[EDGE] 07:54  116ms    5M 1189G 154/154U [GameAnalyzer] Known army advantage is now ClearDisadvantage
+INFO:sc2.main:[EDGE] 07:54  116ms    5M 1189G 154/154U [SupplyBlock] Started
+WARNING:sc2.main:[EDGE] [LAG] Step 10628 took 112 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10632 took 115 ms.
+INFO:sc2.main:[EDGE] 07:54  116ms   10M 1189G 154/154U [Knowledge] Started CREEPTUMOR at (86.5, 89.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10636 took 109 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10640 took 111 ms.
+INFO:sc2.main:[EDGE] 07:55  112ms   15M 1189G 152/154U [SupplyBlock] Ended
+WARNING:sc2.main:[EDGE] [LAG] Step 10644 took 114 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10648 took 113 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10652 took 114 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10656 took 119 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10660 took 117 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10664 took 113 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10668 took 116 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10672 took 112 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10676 took 110 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10680 took 117 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10684 took 110 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10688 took 107 ms.
+INFO:sc2.main:[EDGE] 07:57  108ms  182M 1384G 131/154U [GameAnalyzer] Predicted army advantage is now OverwhelmingDisadvantage
+INFO:sc2.main:[EDGE] 07:57  108ms  182M 1384G 131/154U [ActUnit] QUEEN from HATCHERY at (160.5, 46.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 10692 took 105 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 10696 took 104 ms.
+INFO:sc2.main:[EDGE] 07:57  105ms   37M 1384G 133/154U [GameAnalyzer] Known army advantage is now OverwhelmingDisadvantage
+INFO:sc2.main:[EDGE] 07:57   98ms   52M 1384G 131/154U [ActUnit] ZERGLING from LARVA at (159.8, 43.8)
+WARNING:sc2.main:[EDGE] [LAG] Step 10704 took 102 ms.
+INFO:sc2.main:[EDGE] 07:58  102ms   12M 1388G 132/154U [Knowledge] Started CREEPTUMOR at (82.5, 66.5)
+INFO:sc2.main:[EDGE] 07:59   94ms   52M 1400G 125/154U [ActUnit] ZERGLING from LARVA at (104.6, 41.8)
+WARNING:sc2.main:[EDGE] [LAG] Step 10748 took 112 ms.
+INFO:sc2.main:[EDGE] 08:00   64ms   32M 1404G 126/154U [Knowledge] Started CREEPTUMOR at (84.5, 93.5)
+INFO:sc2.main:[EDGE] 08:01   66ms   62M 1416G 121/154U [Knowledge] Completed CREEPTUMOR at (88.5, 85.5)
+INFO:sc2.main:[EDGE] 08:02   86ms  117M 1428G 116/154U [Knowledge] Completed CREEPTUMOR at (68.5, 80.5)
+INFO:sc2.main:[EDGE] 08:03   80ms  152M 1444G 111/154U [ActUnit] SWARMHOSTMP from LARVA at (104.5, 41.9)
+INFO:sc2.main:[EDGE] 08:03   80ms  152M 1444G 111/154U [ActUnit] ZERGLING from LARVA at (102.4, 41.8)
+INFO:sc2.main:[EDGE] 08:05   54ms   67M 1389G 109/154U [Knowledge] Completed CREEPTUMOR at (86.5, 89.5)
+INFO:sc2.main:[EDGE] 08:05   77ms   82M 1389G 109/154U [Inject] injecting hatch (160.5, 46.5)
+INFO:sc2.main:[EDGE] 08:06   85ms   92M 1393G 109/154U [Knowledge] Started CREEPTUMOR at (122.5, 83.5)
+INFO:sc2.main:[EDGE] 08:06   85ms   97M 1401G 109/162U [Knowledge] Started CREEPTUMORQUEEN at (141.5, 51.5)
+INFO:sc2.main:[EDGE] 08:07   89ms  152M 1413G 109/162U [ActUnit] SWARMHOSTMP from LARVA at (133.1, 40.7)
+INFO:sc2.main:[EDGE] 08:07   89ms  152M 1413G 109/162U [ActUnit] ZERGLING from LARVA at (103.9, 41.2)
+INFO:sc2.main:[EDGE] 08:08   91ms   27M 1346G 113/170U [Knowledge] Completed CREEPTUMOR at (82.5, 66.5)
+INFO:sc2.main:[EDGE] 08:09   88ms   42M 1354G 113/170U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 08:10   83ms   87M 1362G 113/178U [Knowledge] Completed EXTRACTOR at (99.5, 37.5)
+INFO:sc2.main:[EDGE] 08:10   87ms   92M 1362G 113/178U [Knowledge] Completed EXTRACTOR at (96.5, 41.5)
+INFO:sc2.main:[EDGE] 08:10   87ms  102M 1370G 112/178U [Knowledge] Completed CREEPTUMORBURROWED at (84.5, 93.5)
+INFO:sc2.main:[EDGE] 08:11   89ms  162M 1382G 110/178U [ActUnit] SWARMHOSTMP from LARVA at (160.8, 43.9)
+INFO:sc2.main:[EDGE] 08:13   87ms  107M 1327G 111/178U [Knowledge] Started CREEPTUMOR at (82.5, 90.5)
+INFO:sc2.main:[EDGE] 08:14   80ms  127M 1331G 111/178U [Knowledge] Started CREEPTUMOR at (64.5, 83.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11076 took 114 ms.
+INFO:sc2.main:[EDGE] 08:15   85ms  152M 1343G 109/178U [ActUnit] SWARMHOSTMP from LARVA at (133.5, 40.9)
+INFO:sc2.main:[EDGE] 08:15   88ms   57M 1268G 111/178U [GameAnalyzer] Income advantage is now SmallAdvantage
+INFO:sc2.main:[EDGE] 08:16   85ms  102M 1284G 105/178U [Knowledge] Completed CREEPTUMOR at (122.5, 83.5)
+INFO:sc2.main:[EDGE] 08:17   92ms  117M 1292G 103/178U [Knowledge] Completed CREEPTUMORBURROWED at (141.5, 51.5)
+INFO:sc2.main:[EDGE] 08:17   95ms  142M 1296G 102/178U [Knowledge] Started CREEPTUMOR at (80.5, 94.5)
+INFO:sc2.main:[EDGE] 08:18   87ms  152M 1300G 101/178U [ActUnit] SWARMHOSTMP from LARVA at (160.9, 43.6)
+WARNING:sc2.main:[EDGE] [LAG] Step 11164 took 118 ms.
+INFO:sc2.main:[EDGE] 08:18   89ms   67M 1229G 101/178U [Knowledge] Completed EVOLUTIONCHAMBER at (151.5, 46.5)
+INFO:sc2.main:[EDGE] 08:21   98ms  122M 1257G  98/178U [Knowledge] Started CREEPTUMOR at (85.5, 73.5)
+INFO:sc2.main:[EDGE] 08:21   89ms  152M 1265G  98/178U [ActUnit] SWARMHOSTMP from LARVA at (103.7, 41.2)
+WARNING:sc2.main:[EDGE] [LAG] Step 11252 took 108 ms.
+INFO:sc2.main:[EDGE] 08:23   83ms   87M 1202G  99/178U [Knowledge] Started CREEPTUMOR at (77.5, 97.5)
+INFO:sc2.main:[EDGE] 08:24   79ms  127M 1218G  96/178U [Knowledge] Completed CREEPTUMORBURROWED at (82.5, 90.5)
+INFO:sc2.main:[EDGE] 08:24   79ms  127M 1218G  96/178U [Inject] injecting hatch (103.5, 44.5)
+INFO:sc2.main:[EDGE] 08:25   85ms  142M 1222G  96/178U [Knowledge] Completed CREEPTUMOR at (64.5, 83.5)
+INFO:sc2.main:[EDGE] 08:25   86ms  142M 1222G  96/172U [GameAnalyzer] Income advantage is now Even
+INFO:sc2.main:[EDGE] 08:25   86ms  157M 1234G  96/172U [ActUnit] SWARMHOSTMP from LARVA at (133.8, 40.5)
+INFO:sc2.main:[EDGE] 08:26   75ms   82M 1171G  95/172U [Inject] injecting hatch (133.5, 43.5)
+INFO:sc2.main:[EDGE] 08:28   71ms  132M 1187G  95/172U [Knowledge] Completed CREEPTUMOR at (80.5, 94.5)
+INFO:sc2.main:[EDGE] 08:28   52ms  137M 1191G  95/172U [Knowledge] Started CREEPTUMOR at (117.5, 86.5)
+INFO:sc2.main:[EDGE] 08:29   58ms  152M 1195G  95/172U [ActUnit] QUEEN from HATCHERY at (133.5, 43.5)
+INFO:sc2.main:[EDGE] 08:29   54ms    2M 1195G  97/172U [Knowledge] Started CREEPTUMOR at (136.5, 55.5)
+INFO:sc2.main:[EDGE] 08:31   93ms   62M 1223G  96/172U [Knowledge] Completed CREEPTUMORBURROWED at (85.5, 73.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11476 took 109 ms.
+INFO:sc2.main:[EDGE] 08:32  109ms   87M 1227G  96/172U [GameAnalyzer] Income advantage is now SmallDisadvantage
+WARNING:sc2.main:[EDGE] [LAG] Step 11480 took 109 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11484 took 116 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11488 took 112 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11492 took 114 ms.
+INFO:sc2.main:[EDGE] 08:33  114ms   97M 1231G  95/172U [Inject] injecting hatch (160.5, 46.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11496 took 116 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11500 took 112 ms.
+INFO:sc2.main:[EDGE] 08:33  113ms  102M 1235G  94/172U [Knowledge] Completed CREEPTUMOR at (77.5, 97.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11504 took 111 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11508 took 122 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11512 took 112 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11516 took 116 ms.
+INFO:sc2.main:[EDGE] 08:34  117ms  102M 1239G  93/178U [Knowledge] Completed HATCHERY at (144.5, 71.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11520 took 113 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11524 took 114 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11528 took 114 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11532 took 127 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11536 took 118 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11540 took 123 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11544 took 124 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11548 took 118 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11552 took 113 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11556 took 116 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11560 took 111 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11564 took 112 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11568 took 117 ms.
+INFO:sc2.main:[EDGE] 08:36  118ms  132M 1251G  93/178U [Knowledge] Started CREEPTUMOR at (77.5, 94.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11572 took 110 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11576 took 111 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11580 took 119 ms.
+INFO:sc2.main:[EDGE] 08:37  120ms  132M 1255G  93/178U [Knowledge] Started CREEPTUMOR at (67.5, 88.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11584 took 113 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11588 took 110 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11592 took 116 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11596 took 107 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11600 took 106 ms.
+INFO:sc2.main:[EDGE] 08:38  106ms  152M 1259G  89/178U [ActUnit] QUEEN from HATCHERY at (144.5, 71.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11604 took 105 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11608 took 130 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11612 took 103 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11616 took 105 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11620 took 102 ms.
+WARNING:sc2.main:[EDGE] [LAG] Step 11628 took 102 ms.
+INFO:sc2.main:[EDGE] 08:39   96ms   12M 1267G  86/178U [Knowledge] Completed CREEPTUMOR at (117.5, 86.5)
+INFO:sc2.main:[EDGE] 08:40   84ms   22M 1271G  79/178U [Knowledge] Started CREEPTUMOR at (74.5, 97.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 11700 took 108 ms.
+INFO:sc2.main:[EDGE] 08:43   75ms   52M 1291G  72/178U [Knowledge] Started CREEPTUMOR at (86.5, 79.5)
+INFO:sc2.main:[EDGE] 08:45   59ms   77M 1299G  65/178U [Knowledge] Started CREEPTUMOR at (72.5, 100.5)
+INFO:sc2.main:[EDGE] 08:46   74ms   77M 1303G  62/178U [GameAnalyzer] Income advantage is now ClearDisadvantage
+INFO:sc2.main:[EDGE] 08:46   69ms   77M 1307G  60/178U [GameAnalyzer] Income advantage is now SmallDisadvantage
+INFO:sc2.main:[EDGE] 08:47   76ms   92M 1311G  58/178U [Knowledge] Completed CREEPTUMORBURROWED at (77.5, 94.5)
+INFO:sc2.main:[EDGE] 08:47   75ms   92M 1315G  57/178U [GameAnalyzer] Income advantage is now ClearDisadvantage
+INFO:sc2.main:[EDGE] 08:47   49ms  102M 1315G  55/178U [Knowledge] Completed CREEPTUMORBURROWED at (67.5, 88.5)
+INFO:sc2.main:[EDGE] 08:51   72ms  127M 1335G  55/178U [Knowledge] Completed CREEPTUMOR at (74.5, 97.5)
+INFO:sc2.main:[EDGE] 08:51   77ms  137M 1335G  55/178U [Knowledge] Started CREEPTUMOR at (115.5, 91.5)
+INFO:sc2.main:[EDGE] 08:52   53ms  297M 1343G  53/172U [ActUnit] QUEEN from HATCHERY at (160.5, 46.5)
+INFO:sc2.main:[EDGE] 08:52   53ms  297M 1343G  53/172U [ActUnit] ZERGLING from LARVA at (145.0, 68.9)
+INFO:sc2.main:[EDGE] 08:53   75ms   97M 1343G  56/172U [ActUnit] ZERGLING from LARVA at (160.1, 43.4)
+INFO:sc2.main:[EDGE] 08:53   81ms   52M 1347G  57/172U [ActUnit] ZERGLING from LARVA at (144.8, 68.9)
+INFO:sc2.main:[EDGE] 08:54   85ms   17M 1351G  58/172U [Knowledge] Completed CREEPTUMOR at (86.5, 79.5)
+INFO:sc2.main:[EDGE] 08:56   91ms   37M 1363G  58/172U [Knowledge] Completed CREEPTUMORBURROWED at (72.5, 100.5)
+INFO:sc2.main:[EDGE] 08:58   81ms   52M 1371G  58/172U [ActUnit] ZERGLING from LARVA at (160.1, 43.2)
+INFO:sc2.main:[EDGE] 08:59   74ms   17M 1379G  59/172U [Knowledge] Started CREEPTUMOR at (70.5, 98.5)
+INFO:sc2.main:[EDGE] 09:00   84ms   22M 1383G  59/172U [Knowledge] Started CREEPTUMOR at (69.5, 96.5)
+INFO:sc2.main:[EDGE] 09:02   54ms   47M 1395G  53/164U [Knowledge] Completed CREEPTUMORBURROWED at (115.5, 91.5)
+INFO:sc2.main:[EDGE] 09:02   80ms   52M 1395G  53/164U [ActUnit] ZERGLING from LARVA at (160.3, 43.5)
+WARNING:sc2.main:[EDGE] [LAG] Step 12168 took 101 ms.
+INFO:sc2.main:[EDGE] 09:04   74ms   12M 1403G  52/164U [Knowledge] Started CREEPTUMOR at (72.5, 105.5)
+INFO:sc2.protocol:Client status changed to Status.ended (was Status.in_game)
+INFO:root:Result for player 2 - Bot MacroRoach(Zerg): Victory
+INFO:sc2.protocol:Client status changed to Status.launched (was Status.in_game)
+INFO:sc2.sc2process:kill_switch: Process cleanup
+INFO:sc2.sc2process:Cleaning up...
+INFO:sc2.sc2process:Cleanup complete
+INFO:sc2.sc2process:Cleaning up...
+INFO:sc2.sc2process:Cleanup complete

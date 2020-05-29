@@ -3,10 +3,12 @@ from sc2.ids.unit_typeid import UnitTypeId
 from sc2.ids.upgrade_id import UpgradeId
 
 from paul_plans.mass_expand import MassExpand
+from paul_plans.paul_auto_overlord import PaulAutoOverLord
 from sharpy.plans import BuildOrder, SequentialList, Step, StepBuildGas
-from sharpy.plans.acts import ActBuilding, ActExpand, ActTech
-from sharpy.plans.acts.zerg import AutoOverLord, MorphLair, ZergUnit, MorphHive
-from sharpy.plans.require import RequiredAll, UnitExists, RequiredTechReady
+from sharpy.plans.acts import ActBuilding, Expand, Tech
+from sharpy.plans.acts.zerg import MorphLair, ZergUnit, MorphHive
+from sharpy.plans.require import All, UnitExists, TechReady
+from sharpy.managers.game_states.advantage import at_least_clear_disadvantage
 
 
 class LingBaneUltraCorruptor(BuildOrder):
@@ -40,19 +42,19 @@ class LingBaneUltraCorruptor(BuildOrder):
         )
 
         tech_buildings = BuildOrder(
-            Step(None, ActExpand(3, priority=True, consider_worker_production=False), skip_until=self.enemy_expansion),
+            Step(None, Expand(3, priority=True, consider_worker_production=False), skip_until=self.take_third),
             Step(None, StepBuildGas(to_count=2)),
             Step(UnitExists(UnitTypeId.LAIR), StepBuildGas(4)),
             Step(None, ActBuilding(UnitTypeId.SPAWNINGPOOL)),
             Step(UnitExists(UnitTypeId.SPAWNINGPOOL), ActBuilding(UnitTypeId.BANELINGNEST)),
             Step(UnitExists(UnitTypeId.BANELINGNEST), MorphLair()),
             Step(
-                RequiredAll([UnitExists(UnitTypeId.DRONE, 60), UnitExists(UnitTypeId.LAIR)]),
+                All([UnitExists(UnitTypeId.DRONE, 60), UnitExists(UnitTypeId.LAIR)]),
                 ActBuilding(UnitTypeId.INFESTATIONPIT),
             ),
             Step(UnitExists(UnitTypeId.INFESTATIONPIT), StepBuildGas(6)),
             Step(UnitExists(UnitTypeId.LAIR), ActBuilding(UnitTypeId.EVOLUTIONCHAMBER, to_count=2)),
-            Step(RequiredAll([UnitExists(UnitTypeId.LAIR), UnitExists(UnitTypeId.INFESTATIONPIT)]), MorphHive()),
+            Step(All([UnitExists(UnitTypeId.LAIR), UnitExists(UnitTypeId.INFESTATIONPIT)]), MorphHive()),
             Step(UnitExists(UnitTypeId.HIVE), ActBuilding(UnitTypeId.ULTRALISKCAVERN)),
             Step(UnitExists(UnitTypeId.LAIR), ActBuilding(UnitTypeId.SPIRE), skip_until=self.should_build_air),
             Step(UnitExists(UnitTypeId.HIVE), StepBuildGas(8))
@@ -60,62 +62,64 @@ class LingBaneUltraCorruptor(BuildOrder):
 
         upgrades = BuildOrder(
             Step(
-                RequiredAll([UnitExists(UnitTypeId.BANELINGNEST), UnitExists(UnitTypeId.LAIR)]),
-                ActTech(UpgradeId.CENTRIFICALHOOKS),
+                All([UnitExists(UnitTypeId.BANELINGNEST), UnitExists(UnitTypeId.LAIR)]),
+                Tech(UpgradeId.CENTRIFICALHOOKS),
             ),
             SequentialList(
-                Step(None, ActTech(UpgradeId.ZERGMELEEWEAPONSLEVEL1)),
-                Step(UnitExists(UnitTypeId.LAIR), ActTech(UpgradeId.ZERGMELEEWEAPONSLEVEL2)),
-                Step(UnitExists(UnitTypeId.HIVE), ActTech(UpgradeId.ZERGMELEEWEAPONSLEVEL3)),
+                Step(None, Tech(UpgradeId.ZERGMELEEWEAPONSLEVEL1)),
+                Step(UnitExists(UnitTypeId.LAIR), Tech(UpgradeId.ZERGMELEEWEAPONSLEVEL2)),
+                Step(UnitExists(UnitTypeId.HIVE), Tech(UpgradeId.ZERGMELEEWEAPONSLEVEL3)),
             ),
             SequentialList(
                 Step(
                     UnitExists(UnitTypeId.EVOLUTIONCHAMBER, 2, include_not_ready=False, include_pending=False),
-                    ActTech(UpgradeId.ZERGGROUNDARMORSLEVEL1),
+                    Tech(UpgradeId.ZERGGROUNDARMORSLEVEL1),
                 ),
-                Step(UnitExists(UnitTypeId.LAIR), ActTech(UpgradeId.ZERGGROUNDARMORSLEVEL2)),
-                Step(UnitExists(UnitTypeId.HIVE), ActTech(UpgradeId.ZERGGROUNDARMORSLEVEL3)),
+                Step(UnitExists(UnitTypeId.LAIR), Tech(UpgradeId.ZERGGROUNDARMORSLEVEL2)),
+                Step(UnitExists(UnitTypeId.HIVE), Tech(UpgradeId.ZERGGROUNDARMORSLEVEL3)),
             ),
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), ActTech(UpgradeId.ZERGLINGMOVEMENTSPEED)),
+            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), Tech(UpgradeId.ZERGLINGMOVEMENTSPEED)),
             Step(
-                RequiredAll([UnitExists(UnitTypeId.SPAWNINGPOOL), UnitExists(UnitTypeId.HIVE)]),
-                ActTech(UpgradeId.ZERGLINGATTACKSPEED),
+                All([UnitExists(UnitTypeId.SPAWNINGPOOL), UnitExists(UnitTypeId.HIVE)]),
+                Tech(UpgradeId.ZERGLINGATTACKSPEED),
             ),
             SequentialList(
-                Step(UnitExists(UnitTypeId.ULTRALISKCAVERN), ActTech(UpgradeId.CHITINOUSPLATING)),
-                Step(UnitExists(UnitTypeId.ULTRALISKCAVERN), ActTech(UpgradeId.ANABOLICSYNTHESIS)),
+                Step(UnitExists(UnitTypeId.ULTRALISKCAVERN), Tech(UpgradeId.CHITINOUSPLATING)),
+                Step(UnitExists(UnitTypeId.ULTRALISKCAVERN), Tech(UpgradeId.ANABOLICSYNTHESIS)),
             ),
             SequentialList(
-                Step(UnitExists(UnitTypeId.SPIRE), ActTech(UpgradeId.ZERGFLYERWEAPONSLEVEL1)),
-                Step(UnitExists(UnitTypeId.SPIRE), ActTech(UpgradeId.ZERGFLYERWEAPONSLEVEL2)),
+                Step(UnitExists(UnitTypeId.SPIRE), Tech(UpgradeId.ZERGFLYERWEAPONSLEVEL1)),
+                Step(UnitExists(UnitTypeId.SPIRE), Tech(UpgradeId.ZERGFLYERWEAPONSLEVEL2)),
                 Step(
-                    RequiredAll(
+                    All(
                         [
                             UnitExists(UnitTypeId.SPIRE),
                             UnitExists(UnitTypeId.HIVE),
                         ]
                     ),
-                    ActTech(UpgradeId.ZERGFLYERWEAPONSLEVEL3),
+                    Tech(UpgradeId.ZERGFLYERWEAPONSLEVEL3),
                 ),
-                Step(UnitExists(UnitTypeId.SPIRE), ActTech(UpgradeId.ZERGFLYERARMORSLEVEL1)),
-                Step(UnitExists(UnitTypeId.SPIRE), ActTech(UpgradeId.ZERGFLYERARMORSLEVEL2)),
+                Step(UnitExists(UnitTypeId.SPIRE), Tech(UpgradeId.ZERGFLYERARMORSLEVEL1)),
+                Step(UnitExists(UnitTypeId.SPIRE), Tech(UpgradeId.ZERGFLYERARMORSLEVEL2)),
                 Step(
-                    RequiredAll(
+                    All(
                         [
                             UnitExists(UnitTypeId.SPIRE),
                             UnitExists(UnitTypeId.HIVE),
                         ]
                     ),
-                    ActTech(UpgradeId.ZERGFLYERARMORSLEVEL3),
+                    Tech(UpgradeId.ZERGFLYERARMORSLEVEL3),
                 ),
             ),
-            Step(RequiredTechReady(UpgradeId.CENTRIFICALHOOKS), ActTech(UpgradeId.OVERLORDSPEED)),
+            Step(TechReady(UpgradeId.CENTRIFICALHOOKS), Tech(UpgradeId.OVERLORDSPEED)),
         )
 
-        super().__init__([upgrades, tech_buildings, build_units, MassExpand(), AutoOverLord()])
+        super().__init__([PaulAutoOverLord(), upgrades, tech_buildings, build_units, MassExpand()])
 
-    def enemy_expansion(self, knowledge) -> bool:
+    def take_third(self, knowledge) -> bool:
         if self.knowledge.enemy_townhalls.amount >= 2:
+            return True
+        if self.knowledge.game_analyzer.our_army_advantage not in at_least_clear_disadvantage:
             return True
         return False
 

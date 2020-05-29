@@ -7,9 +7,9 @@ from sc2.ids.unit_typeid import UnitTypeId
 from sc2.ids.upgrade_id import UpgradeId
 from sc2.player import Race
 from sharpy.plans import BuildOrder, Step, SequentialList, StepBuildGas
-from sharpy.plans.acts import ActExpand, ActBuilding, ActTech
+from sharpy.plans.acts import Expand, ActBuilding, Tech
 from sharpy.plans.acts.zerg import ZergUnit, AutoOverLord, MorphLair
-from sharpy.plans.require import RequiredMinerals, UnitExists, RequiredAll, RequiredTechReady, RequiredTime
+from sharpy.plans.require import Minerals, UnitExists, All, TechReady, Time, Supply
 from sharpy.plans.tactics import PlanDistributeWorkers
 from sharpy.plans.tactics.zerg import OverlordScout, LingScout
 from sharpy.plans.tactics.scouting import ScoutLocation
@@ -17,6 +17,8 @@ from paul_plans.roach_rush_response import RoachRushResponse
 from paul_plans.scout_manager import EnemyBuild
 from paul_plans.roach_ravager_swarmhost import RRSH
 from paul_plans.ling_bane_plus import LingBaneUltraCorruptor
+from paul_plans.nydus_main_act import NydusMain
+from paul_plans.nydus_main_2 import NydusLingMain
 
 if TYPE_CHECKING:
     from sharpy.knowledges import Knowledge
@@ -87,25 +89,26 @@ class PaulBuild(BuildOrder):
         )
 
         hard_order = SequentialList(
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.twelve_pool_spines, skip_until=self.twelve_pool_detected),
-            Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.defense_spines, skip_until=self.rush_detected,),
-            Step(
-                UnitExists(UnitTypeId.SPAWNINGPOOL),
-                ActBuilding(UnitTypeId.ROACHWARREN, 1),
-                skip_until=self.twelve_pool_detected,
-            ),
+            # Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.twelve_pool_spines, skip_until=self.twelve_pool_detected),
+            # Step(UnitExists(UnitTypeId.SPAWNINGPOOL), self.defense_spines, skip_until=self.rush_detected,),
+            # Step(
+            #     UnitExists(UnitTypeId.SPAWNINGPOOL),
+            #     ActBuilding(UnitTypeId.ROACHWARREN, 1),
+            #     skip_until=self.twelve_pool_detected,
+            # ),
             Step(None, ZergUnit(UnitTypeId.DRONE, to_count=13, only_once=True)),
             Step(None, ZergUnit(UnitTypeId.OVERLORD, to_count=2, only_once=True)),
             Step(None, ZergUnit(UnitTypeId.DRONE, to_count=17, only_once=True)),
-            Step(None, ActExpand(2, priority=True, consider_worker_production=False)),
+            Step(None, Expand(2, priority=True, consider_worker_production=False)),
             Step(None, ZergUnit(UnitTypeId.DRONE, to_count=18)),
-            Step(RequiredMinerals(120), StepBuildGas(to_count=1)),
+            Step(Minerals(120), StepBuildGas(to_count=1)),
             Step(None, ActBuilding(UnitTypeId.SPAWNINGPOOL)),
-            Step(None, ZergUnit(UnitTypeId.DRONE, to_count=20)),
+            Step(None, ZergUnit(UnitTypeId.DRONE, to_count=21)),
+            Step(Supply(21), ZergUnit(UnitTypeId.OVERLORD, to_count=3)),
             Step(None, ZergUnit(UnitTypeId.QUEEN, to_count=2), skip_until=UnitExists(UnitTypeId.SPAWNINGPOOL)),
             Step(None, ZergUnit(UnitTypeId.ZERGLING, to_count=6), skip_until=UnitExists(UnitTypeId.SPAWNINGPOOL)),
-            Step(None, ZergUnit(UnitTypeId.OVERLORD, to_count=3)),
-            Step(None, ActExpand(3, priority=True, consider_worker_production=False), skip=self.rush_detected),
+            Step(None, ZergUnit(UnitTypeId.OVERLORD, to_count=4)),
+            Step(None, Expand(3, priority=True, consider_worker_production=False), skip=self.rush_detected),
         )
 
         unit_building = BuildOrder(
@@ -136,7 +139,7 @@ class PaulBuild(BuildOrder):
                     ActBuilding(UnitTypeId.SPAWNINGPOOL, to_count=1),
                 ),
                 Step(UnitExists(UnitTypeId.DRONE, 35), ActBuilding(UnitTypeId.ROACHWARREN)),
-                Step(UnitExists(UnitTypeId.ROACHWARREN), ActExpand(3, priority=True, consider_worker_production=False)),
+                Step(UnitExists(UnitTypeId.ROACHWARREN), Expand(3, priority=True, consider_worker_production=False)),
                 Step(UnitExists(UnitTypeId.DRONE, 50), MorphLair()),
                 Step(UnitExists(UnitTypeId.LAIR), ActBuilding(UnitTypeId.EVOLUTIONCHAMBER, to_count=2)),
                 Step(UnitExists(UnitTypeId.HATCHERY, 3, include_not_ready=False), StepBuildGas(3)),
@@ -151,7 +154,7 @@ class PaulBuild(BuildOrder):
                 Step(UnitExists(UnitTypeId.HATCHERY, 4), StepBuildGas(6)),
                 Step(UnitExists(UnitTypeId.HATCHERY, 5), StepBuildGas(8)),
                 Step(
-                    RequiredAll(UnitExists(UnitTypeId.LAIR), UnitExists(UnitTypeId.EXTRACTOR, 4)),
+                    All(UnitExists(UnitTypeId.LAIR), UnitExists(UnitTypeId.EXTRACTOR, 4)),
                     ActBuilding(UnitTypeId.INFESTATIONPIT),
                     skip_until=self.counter_siege,
                 ),
@@ -160,45 +163,56 @@ class PaulBuild(BuildOrder):
 
         upgrades = BuildOrder(
             [
-                Step(UnitExists(UnitTypeId.SPAWNINGPOOL), ActTech(UpgradeId.ZERGLINGMOVEMENTSPEED)),
+                Step(UnitExists(UnitTypeId.SPAWNINGPOOL), Tech(UpgradeId.ZERGLINGMOVEMENTSPEED)),
                 Step(
-                    RequiredAll([UnitExists(UnitTypeId.ROACH), UnitExists(UnitTypeId.LAIR)]),
-                    ActTech(UpgradeId.GLIALRECONSTITUTION),
+                    All([UnitExists(UnitTypeId.ROACH), UnitExists(UnitTypeId.LAIR)]),
+                    Tech(UpgradeId.GLIALRECONSTITUTION),
                 ),
                 SequentialList(
                     Step(
-                        RequiredAll(UnitExists(UnitTypeId.HYDRALISKDEN), UnitExists(UnitTypeId.LAIR)),
-                        ActTech(UpgradeId.EVOLVEGROOVEDSPINES),
+                        All(UnitExists(UnitTypeId.HYDRALISKDEN), UnitExists(UnitTypeId.LAIR)),
+                        Tech(UpgradeId.EVOLVEGROOVEDSPINES),
                     ),
                     Step(
-                        RequiredAll(
+                        All(
                             UnitExists(UnitTypeId.HYDRALISKDEN),
                             UnitExists(UnitTypeId.LAIR),
-                            RequiredTechReady(UpgradeId.EVOLVEGROOVEDSPINES),
+                            TechReady(UpgradeId.EVOLVEGROOVEDSPINES),
                         ),
-                        ActTech(UpgradeId.EVOLVEMUSCULARAUGMENTS),
+                        Tech(UpgradeId.EVOLVEMUSCULARAUGMENTS),
                     ),
                 ),
             ]
         )
 
         scouting = SequentialList(
-            Step(RequiredTime(3 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
-            Step(RequiredTime(3 * 60), LingScout(1, ScoutLocation.scout_enemy1())),
-            Step(RequiredTime(4 * 60), LingScout(2, ScoutLocation.scout_enemy3(), ScoutLocation.scout_enemy2())),
-            Step(RequiredTime(6 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
-            Step(RequiredTime(7 * 60), LingScout(2, ScoutLocation.scout_enemy4(), ScoutLocation.scout_enemy3())),
+            Step(Time(3 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
+            Step(Time(3 * 60), LingScout(1, ScoutLocation.scout_enemy1())),
+            Step(Time(4 * 60), LingScout(2, ScoutLocation.scout_enemy3(), ScoutLocation.scout_enemy2())),
+            Step(Time(6 * 60), OverlordScout(ScoutLocation.scout_enemy1())),
+            Step(Time(7 * 60), LingScout(2, ScoutLocation.scout_enemy4(), ScoutLocation.scout_enemy3())),
         )
 
         self.distribution = PlanDistributeWorkers()
         self.roach_response = RoachRushResponse()
         self.rrsh = RRSH()
         self.lbu = LingBaneUltraCorruptor()
+        self.auto_ovie = AutoOverLord()
 
         build_steps = BuildOrder(
-            bc_air_defense, hard_order, unit_building, StandardUpgrades(), upgrades, tech_buildings
+            bc_air_defense,
+            SequentialList(
+                hard_order,
+                unit_building,
+            ),
+            StandardUpgrades(),
+            upgrades,
+            tech_buildings,
+            Step(Supply(27), self.auto_ovie),
         )
         send_order = BuildOrder(
+            # Step(None, NydusMain(UnitTypeId.ZERGLING, 15),  skip_until=self.should_build_nydus),
+            # Step(None, NydusLingMain(15), skip_until=self.should_build_nydus),
             Step(None, self.roach_response, skip=lambda k: k.ai.scout_manager.enemy_build != EnemyBuild.RoachRush,),
             Step(
                 None,
@@ -212,9 +226,9 @@ class PaulBuild(BuildOrder):
                 self.lbu,
                 skip=lambda k: k.ai.scout_manager.enemy_build not in {EnemyBuild.Bio, EnemyBuild.LingRush},
             ),
-            AutoOverLord(),
             self.distribution,
             scouting,
+            Step(None, bc_air_defense, skip_until=self.starport_tech_lab),
         )
 
         super().__init__(send_order)
@@ -226,6 +240,11 @@ class PaulBuild(BuildOrder):
 
     def should_take_third(self, knowledge: "Knowledge"):
         if not self.rush_detected():
+            return True
+        return False
+
+    def starport_tech_lab(self, knowledge: "Knowledge"):
+        if self.knowledge.known_enemy_units(UnitTypeId.STARPORTTECHLAB):
             return True
         return False
 
@@ -241,6 +260,11 @@ class PaulBuild(BuildOrder):
 
     def counter_siege(self, knowledge: "Knowledge"):
         if self.knowledge.known_enemy_units(UnitTypeId.SIEGETANK).amount >= 5:
+            return True
+        return False
+
+    def should_build_nydus(self, knowledge: "Knowledge"):
+        if self.get_count(UnitTypeId.LAIR, include_not_ready=False, include_pending=False):
             return True
         return False
 

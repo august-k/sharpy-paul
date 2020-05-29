@@ -7,6 +7,7 @@ import logging
 
 import aiohttp
 
+from sc2 import Race, Difficulty
 from sc2.client import Client
 
 import sc2
@@ -75,3 +76,32 @@ async def join_ladder_game(
         await ws_connection.close()
 
     return result
+
+
+def stand_alone_game(bot):
+    """
+    Play a game against the ladder build or test the bot against ingame ai
+    """
+    print("Starting local game...")
+    print("Play as human? (y / n)")
+    input_human = input(">> ")
+    if input_human and input_human.lower() == "y":
+        races = ["p", "z", "t", "r"]
+        race = None
+        while race is None:
+            print("Input your race (p / z / t / r):")
+            human_race = input(">> ").lower()
+            if human_race in races:
+                if human_race == "p":
+                    race = Race.Protoss
+                elif human_race == "z":
+                    race = Race.Zerg
+                elif human_race == "t":
+                    race = Race.Terran
+                elif human_race == "r":
+                    race = Race.Random
+                else:
+                    print(f'"{human_race}" not recognized.')
+        return sc2.run_game(sc2.maps.get("AcropolisLE"), [Human(race), bot], realtime=True)
+
+    return sc2.run_game(sc2.maps.get("AcropolisLE"), [bot, Computer(Race.Random, Difficulty.VeryHard)], realtime=False,)

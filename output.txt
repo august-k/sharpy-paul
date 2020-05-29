@@ -1,0 +1,40 @@
+Updated version.txt with: 2020-04-23 67e3c91
+Player1 type Paul not found in:
+ 4gate
+adept
+cannonrush
+disruptor
+dt
+robo
+stalker
+voidray
+zealot
+tempest
+12pool
+200roach
+hydra
+lings
+macro
+mutalisk
+workerrush
+lurker
+banshee
+bc
+bio
+cyclone
+marine
+oldrusty
+tank
+terranturtle
+lingflood
+lingspeed
+randomzerg
+randomprotoss
+randomterran
+human
+ai
+debugidle
+debugunits
+debugrestorepower
+debuguseneural
+debugdetectneural
